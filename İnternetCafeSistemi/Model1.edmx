@@ -1,0 +1,516 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NetCafeSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TableHareketler">
+          <Key>
+            <PropertyRef Name="HareketID" />
+          </Key>
+          <Property Name="HareketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciID" Type="int" />
+          <Property Name="MasaID" Type="int" />
+          <Property Name="IslemTuru" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IslemZamani" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TableKullanicilar">
+          <Key>
+            <PropertyRef Name="KullaniciID" />
+          </Key>
+          <Property Name="KullaniciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sifre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Mail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="IstekDurum" Type="int" />
+        </EntityType>
+        <EntityType Name="TableMasalar">
+          <Key>
+            <PropertyRef Name="MasaID" />
+          </Key>
+          <Property Name="MasaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasaAdi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Durumu" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="KullaniciID" Type="int" />
+        </EntityType>
+        <EntityType Name="TableOturumlar">
+          <Key>
+            <PropertyRef Name="OturumID" />
+          </Key>
+          <Property Name="OturumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciID" Type="int" />
+          <Property Name="MasaID" Type="int" />
+          <Property Name="BaslangicZamani" Type="datetime" Nullable="false" />
+          <Property Name="BitisZamanı" Type="datetime" Nullable="false" />
+          <Property Name="KullanilanSure" Type="int" />
+          <Property Name="Ucret" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="TableUcretlendirme">
+          <Key>
+            <PropertyRef Name="UcretID" />
+          </Key>
+          <Property Name="UcretID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OturumID" Type="int" />
+          <Property Name="AcilisTipi" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_TableHareketler_TableKullanicilar">
+          <End Role="TableKullanicilar" Type="Self.TableKullanicilar" Multiplicity="0..1" />
+          <End Role="TableHareketler" Type="Self.TableHareketler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableKullanicilar">
+              <PropertyRef Name="KullaniciID" />
+            </Principal>
+            <Dependent Role="TableHareketler">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableHareketler_TableKullanicilar1">
+          <End Role="TableKullanicilar" Type="Self.TableKullanicilar" Multiplicity="0..1" />
+          <End Role="TableHareketler" Type="Self.TableHareketler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableKullanicilar">
+              <PropertyRef Name="KullaniciID" />
+            </Principal>
+            <Dependent Role="TableHareketler">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableHareketler_TableMasalar">
+          <End Role="TableMasalar" Type="Self.TableMasalar" Multiplicity="0..1" />
+          <End Role="TableHareketler" Type="Self.TableHareketler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableMasalar">
+              <PropertyRef Name="MasaID" />
+            </Principal>
+            <Dependent Role="TableHareketler">
+              <PropertyRef Name="MasaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableHareketler_TableMasalar1">
+          <End Role="TableMasalar" Type="Self.TableMasalar" Multiplicity="0..1" />
+          <End Role="TableHareketler" Type="Self.TableHareketler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableMasalar">
+              <PropertyRef Name="MasaID" />
+            </Principal>
+            <Dependent Role="TableHareketler">
+              <PropertyRef Name="MasaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableMasalar_TableKullanicilar">
+          <End Role="TableKullanicilar" Type="Self.TableKullanicilar" Multiplicity="0..1" />
+          <End Role="TableMasalar" Type="Self.TableMasalar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableKullanicilar">
+              <PropertyRef Name="KullaniciID" />
+            </Principal>
+            <Dependent Role="TableMasalar">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableOturumlar_TableKullanicilar">
+          <End Role="TableKullanicilar" Type="Self.TableKullanicilar" Multiplicity="0..1" />
+          <End Role="TableOturumlar" Type="Self.TableOturumlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableKullanicilar">
+              <PropertyRef Name="KullaniciID" />
+            </Principal>
+            <Dependent Role="TableOturumlar">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableOturumlar_TableMasalar">
+          <End Role="TableMasalar" Type="Self.TableMasalar" Multiplicity="0..1" />
+          <End Role="TableOturumlar" Type="Self.TableOturumlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableMasalar">
+              <PropertyRef Name="MasaID" />
+            </Principal>
+            <Dependent Role="TableOturumlar">
+              <PropertyRef Name="MasaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableUcretlendirme_TableOturumlar">
+          <End Role="TableOturumlar" Type="Self.TableOturumlar" Multiplicity="0..1" />
+          <End Role="TableUcretlendirme" Type="Self.TableUcretlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableOturumlar">
+              <PropertyRef Name="OturumID" />
+            </Principal>
+            <Dependent Role="TableUcretlendirme">
+              <PropertyRef Name="OturumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NetCafeSystemModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TableHareketler" EntityType="Self.TableHareketler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TableKullanicilar" EntityType="Self.TableKullanicilar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TableMasalar" EntityType="Self.TableMasalar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TableOturumlar" EntityType="Self.TableOturumlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TableUcretlendirme" EntityType="Self.TableUcretlendirme" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TableHareketler_TableKullanicilar" Association="Self.FK_TableHareketler_TableKullanicilar">
+            <End Role="TableKullanicilar" EntitySet="TableKullanicilar" />
+            <End Role="TableHareketler" EntitySet="TableHareketler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableHareketler_TableKullanicilar1" Association="Self.FK_TableHareketler_TableKullanicilar1">
+            <End Role="TableKullanicilar" EntitySet="TableKullanicilar" />
+            <End Role="TableHareketler" EntitySet="TableHareketler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableHareketler_TableMasalar" Association="Self.FK_TableHareketler_TableMasalar">
+            <End Role="TableMasalar" EntitySet="TableMasalar" />
+            <End Role="TableHareketler" EntitySet="TableHareketler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableHareketler_TableMasalar1" Association="Self.FK_TableHareketler_TableMasalar1">
+            <End Role="TableMasalar" EntitySet="TableMasalar" />
+            <End Role="TableHareketler" EntitySet="TableHareketler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableMasalar_TableKullanicilar" Association="Self.FK_TableMasalar_TableKullanicilar">
+            <End Role="TableKullanicilar" EntitySet="TableKullanicilar" />
+            <End Role="TableMasalar" EntitySet="TableMasalar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableOturumlar_TableKullanicilar" Association="Self.FK_TableOturumlar_TableKullanicilar">
+            <End Role="TableKullanicilar" EntitySet="TableKullanicilar" />
+            <End Role="TableOturumlar" EntitySet="TableOturumlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableOturumlar_TableMasalar" Association="Self.FK_TableOturumlar_TableMasalar">
+            <End Role="TableMasalar" EntitySet="TableMasalar" />
+            <End Role="TableOturumlar" EntitySet="TableOturumlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableUcretlendirme_TableOturumlar" Association="Self.FK_TableUcretlendirme_TableOturumlar">
+            <End Role="TableOturumlar" EntitySet="TableOturumlar" />
+            <End Role="TableUcretlendirme" EntitySet="TableUcretlendirme" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NetCafeSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TableHareketler">
+          <Key>
+            <PropertyRef Name="HareketID" />
+          </Key>
+          <Property Name="HareketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciID" Type="Int32" />
+          <Property Name="MasaID" Type="Int32" />
+          <Property Name="IslemTuru" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IslemZamani" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TableKullanicilar" Relationship="Self.FK_TableHareketler_TableKullanicilar" FromRole="TableHareketler" ToRole="TableKullanicilar" />
+          <NavigationProperty Name="TableKullanicilar1" Relationship="Self.FK_TableHareketler_TableKullanicilar1" FromRole="TableHareketler" ToRole="TableKullanicilar" />
+          <NavigationProperty Name="TableMasalar" Relationship="Self.FK_TableHareketler_TableMasalar" FromRole="TableHareketler" ToRole="TableMasalar" />
+          <NavigationProperty Name="TableMasalar1" Relationship="Self.FK_TableHareketler_TableMasalar1" FromRole="TableHareketler" ToRole="TableMasalar" />
+        </EntityType>
+        <EntityType Name="TableKullanicilar">
+          <Key>
+            <PropertyRef Name="KullaniciID" />
+          </Key>
+          <Property Name="KullaniciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sifre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IstekDurum" Type="Int32" />
+          <NavigationProperty Name="TableHareketler" Relationship="Self.FK_TableHareketler_TableKullanicilar" FromRole="TableKullanicilar" ToRole="TableHareketler" />
+          <NavigationProperty Name="TableHareketler1" Relationship="Self.FK_TableHareketler_TableKullanicilar1" FromRole="TableKullanicilar" ToRole="TableHareketler" />
+          <NavigationProperty Name="TableMasalar" Relationship="Self.FK_TableMasalar_TableKullanicilar" FromRole="TableKullanicilar" ToRole="TableMasalar" />
+          <NavigationProperty Name="TableOturumlar" Relationship="Self.FK_TableOturumlar_TableKullanicilar" FromRole="TableKullanicilar" ToRole="TableOturumlar" />
+        </EntityType>
+        <EntityType Name="TableMasalar">
+          <Key>
+            <PropertyRef Name="MasaID" />
+          </Key>
+          <Property Name="MasaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasaAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Durumu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="KullaniciID" Type="Int32" />
+          <NavigationProperty Name="TableHareketler" Relationship="Self.FK_TableHareketler_TableMasalar" FromRole="TableMasalar" ToRole="TableHareketler" />
+          <NavigationProperty Name="TableHareketler1" Relationship="Self.FK_TableHareketler_TableMasalar1" FromRole="TableMasalar" ToRole="TableHareketler" />
+          <NavigationProperty Name="TableKullanicilar" Relationship="Self.FK_TableMasalar_TableKullanicilar" FromRole="TableMasalar" ToRole="TableKullanicilar" />
+          <NavigationProperty Name="TableOturumlar" Relationship="Self.FK_TableOturumlar_TableMasalar" FromRole="TableMasalar" ToRole="TableOturumlar" />
+        </EntityType>
+        <EntityType Name="TableOturumlar">
+          <Key>
+            <PropertyRef Name="OturumID" />
+          </Key>
+          <Property Name="OturumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciID" Type="Int32" />
+          <Property Name="MasaID" Type="Int32" />
+          <Property Name="BaslangicZamani" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BitisZamanı" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="KullanilanSure" Type="Int32" />
+          <Property Name="Ucret" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="TableKullanicilar" Relationship="Self.FK_TableOturumlar_TableKullanicilar" FromRole="TableOturumlar" ToRole="TableKullanicilar" />
+          <NavigationProperty Name="TableMasalar" Relationship="Self.FK_TableOturumlar_TableMasalar" FromRole="TableOturumlar" ToRole="TableMasalar" />
+          <NavigationProperty Name="TableUcretlendirme" Relationship="Self.FK_TableUcretlendirme_TableOturumlar" FromRole="TableOturumlar" ToRole="TableUcretlendirme" />
+        </EntityType>
+        <EntityType Name="TableUcretlendirme">
+          <Key>
+            <PropertyRef Name="UcretID" />
+          </Key>
+          <Property Name="UcretID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OturumID" Type="Int32" />
+          <Property Name="AcilisTipi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TableOturumlar" Relationship="Self.FK_TableUcretlendirme_TableOturumlar" FromRole="TableUcretlendirme" ToRole="TableOturumlar" />
+        </EntityType>
+        <Association Name="FK_TableHareketler_TableKullanicilar">
+          <End Role="TableKullanicilar" Type="Self.TableKullanicilar" Multiplicity="0..1" />
+          <End Role="TableHareketler" Type="Self.TableHareketler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableKullanicilar">
+              <PropertyRef Name="KullaniciID" />
+            </Principal>
+            <Dependent Role="TableHareketler">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableHareketler_TableKullanicilar1">
+          <End Role="TableKullanicilar" Type="Self.TableKullanicilar" Multiplicity="0..1" />
+          <End Role="TableHareketler" Type="Self.TableHareketler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableKullanicilar">
+              <PropertyRef Name="KullaniciID" />
+            </Principal>
+            <Dependent Role="TableHareketler">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableHareketler_TableMasalar">
+          <End Role="TableMasalar" Type="Self.TableMasalar" Multiplicity="0..1" />
+          <End Role="TableHareketler" Type="Self.TableHareketler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableMasalar">
+              <PropertyRef Name="MasaID" />
+            </Principal>
+            <Dependent Role="TableHareketler">
+              <PropertyRef Name="MasaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableHareketler_TableMasalar1">
+          <End Role="TableMasalar" Type="Self.TableMasalar" Multiplicity="0..1" />
+          <End Role="TableHareketler" Type="Self.TableHareketler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableMasalar">
+              <PropertyRef Name="MasaID" />
+            </Principal>
+            <Dependent Role="TableHareketler">
+              <PropertyRef Name="MasaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableMasalar_TableKullanicilar">
+          <End Role="TableKullanicilar" Type="Self.TableKullanicilar" Multiplicity="0..1" />
+          <End Role="TableMasalar" Type="Self.TableMasalar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableKullanicilar">
+              <PropertyRef Name="KullaniciID" />
+            </Principal>
+            <Dependent Role="TableMasalar">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableOturumlar_TableKullanicilar">
+          <End Role="TableKullanicilar" Type="Self.TableKullanicilar" Multiplicity="0..1" />
+          <End Role="TableOturumlar" Type="Self.TableOturumlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableKullanicilar">
+              <PropertyRef Name="KullaniciID" />
+            </Principal>
+            <Dependent Role="TableOturumlar">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableOturumlar_TableMasalar">
+          <End Role="TableMasalar" Type="Self.TableMasalar" Multiplicity="0..1" />
+          <End Role="TableOturumlar" Type="Self.TableOturumlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableMasalar">
+              <PropertyRef Name="MasaID" />
+            </Principal>
+            <Dependent Role="TableOturumlar">
+              <PropertyRef Name="MasaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableUcretlendirme_TableOturumlar">
+          <End Role="TableOturumlar" Type="Self.TableOturumlar" Multiplicity="0..1" />
+          <End Role="TableUcretlendirme" Type="Self.TableUcretlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableOturumlar">
+              <PropertyRef Name="OturumID" />
+            </Principal>
+            <Dependent Role="TableUcretlendirme">
+              <PropertyRef Name="OturumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NetCafeSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TableHareketler" EntityType="Self.TableHareketler" />
+          <EntitySet Name="TableKullanicilar" EntityType="Self.TableKullanicilar" />
+          <EntitySet Name="TableMasalar" EntityType="Self.TableMasalar" />
+          <EntitySet Name="TableOturumlar" EntityType="Self.TableOturumlar" />
+          <EntitySet Name="TableUcretlendirme" EntityType="Self.TableUcretlendirme" />
+          <AssociationSet Name="FK_TableHareketler_TableKullanicilar" Association="Self.FK_TableHareketler_TableKullanicilar">
+            <End Role="TableKullanicilar" EntitySet="TableKullanicilar" />
+            <End Role="TableHareketler" EntitySet="TableHareketler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableHareketler_TableKullanicilar1" Association="Self.FK_TableHareketler_TableKullanicilar1">
+            <End Role="TableKullanicilar" EntitySet="TableKullanicilar" />
+            <End Role="TableHareketler" EntitySet="TableHareketler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableHareketler_TableMasalar" Association="Self.FK_TableHareketler_TableMasalar">
+            <End Role="TableMasalar" EntitySet="TableMasalar" />
+            <End Role="TableHareketler" EntitySet="TableHareketler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableHareketler_TableMasalar1" Association="Self.FK_TableHareketler_TableMasalar1">
+            <End Role="TableMasalar" EntitySet="TableMasalar" />
+            <End Role="TableHareketler" EntitySet="TableHareketler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableMasalar_TableKullanicilar" Association="Self.FK_TableMasalar_TableKullanicilar">
+            <End Role="TableKullanicilar" EntitySet="TableKullanicilar" />
+            <End Role="TableMasalar" EntitySet="TableMasalar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableOturumlar_TableKullanicilar" Association="Self.FK_TableOturumlar_TableKullanicilar">
+            <End Role="TableKullanicilar" EntitySet="TableKullanicilar" />
+            <End Role="TableOturumlar" EntitySet="TableOturumlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableOturumlar_TableMasalar" Association="Self.FK_TableOturumlar_TableMasalar">
+            <End Role="TableMasalar" EntitySet="TableMasalar" />
+            <End Role="TableOturumlar" EntitySet="TableOturumlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableUcretlendirme_TableOturumlar" Association="Self.FK_TableUcretlendirme_TableOturumlar">
+            <End Role="TableOturumlar" EntitySet="TableOturumlar" />
+            <End Role="TableUcretlendirme" EntitySet="TableUcretlendirme" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NetCafeSystemModelStoreContainer" CdmEntityContainer="NetCafeSystemEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="NetCafeSystemModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TableHareketler">
+            <EntityTypeMapping TypeName="NetCafeSystemModel.TableHareketler">
+              <MappingFragment StoreEntitySet="TableHareketler">
+                <ScalarProperty Name="HareketID" ColumnName="HareketID" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="MasaID" ColumnName="MasaID" />
+                <ScalarProperty Name="IslemTuru" ColumnName="IslemTuru" />
+                <ScalarProperty Name="IslemZamani" ColumnName="IslemZamani" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TableKullanicilar">
+            <EntityTypeMapping TypeName="NetCafeSystemModel.TableKullanicilar">
+              <MappingFragment StoreEntitySet="TableKullanicilar">
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="KayitTarihi" ColumnName="KayitTarihi" />
+                <ScalarProperty Name="IstekDurum" ColumnName="IstekDurum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TableMasalar">
+            <EntityTypeMapping TypeName="NetCafeSystemModel.TableMasalar">
+              <MappingFragment StoreEntitySet="TableMasalar">
+                <ScalarProperty Name="MasaID" ColumnName="MasaID" />
+                <ScalarProperty Name="MasaAdi" ColumnName="MasaAdi" />
+                <ScalarProperty Name="Durumu" ColumnName="Durumu" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TableOturumlar">
+            <EntityTypeMapping TypeName="NetCafeSystemModel.TableOturumlar">
+              <MappingFragment StoreEntitySet="TableOturumlar">
+                <ScalarProperty Name="OturumID" ColumnName="OturumID" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="MasaID" ColumnName="MasaID" />
+                <ScalarProperty Name="BaslangicZamani" ColumnName="BaslangicZamani" />
+                <ScalarProperty Name="BitisZamanı" ColumnName="BitisZamanı" />
+                <ScalarProperty Name="KullanilanSure" ColumnName="KullanilanSure" />
+                <ScalarProperty Name="Ucret" ColumnName="Ucret" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TableUcretlendirme">
+            <EntityTypeMapping TypeName="NetCafeSystemModel.TableUcretlendirme">
+              <MappingFragment StoreEntitySet="TableUcretlendirme">
+                <ScalarProperty Name="UcretID" ColumnName="UcretID" />
+                <ScalarProperty Name="OturumID" ColumnName="OturumID" />
+                <ScalarProperty Name="AcilisTipi" ColumnName="AcilisTipi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
