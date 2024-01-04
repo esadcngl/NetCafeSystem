@@ -14,23 +14,15 @@ namespace İnternetCafeSistemi
     
     public partial class TableOturumlar
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TableOturumlar()
-        {
-            this.TableUcretlendirme = new HashSet<TableUcretlendirme>();
-        }
-    
         public int OturumID { get; set; }
         public Nullable<int> KullaniciID { get; set; }
         public Nullable<int> MasaID { get; set; }
-        public System.DateTime BaslangicZamani { get; set; }
-        public System.DateTime BitisZamanı { get; set; }
+        public Nullable<System.DateTime> BaslangicZamani { get; set; }
+        public Nullable<System.DateTime> BitisZamanı { get; set; }
         public Nullable<int> KullanilanSure { get; set; }
         public Nullable<decimal> Ucret { get; set; }
     
         public virtual TableKullanicilar TableKullanicilar { get; set; }
         public virtual TableMasalar TableMasalar { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TableUcretlendirme> TableUcretlendirme { get; set; }
     }
 }

@@ -29,7 +29,8 @@
     <Property Name="Sifre" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="Mail" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="KayitTarihi" Type="datetime" Nullable="false" />
-    <Property Name="IstekDurum" Type="int" />
+    <Property Name="IstekDurum" Type="int" Nullable="false" />
+    <Property Name="MasaID" Type="int" />
   </EntityType>
   <EntityType Name="TableMasalar">
     <Key>
@@ -47,18 +48,10 @@
     <Property Name="OturumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="KullaniciID" Type="int" />
     <Property Name="MasaID" Type="int" />
-    <Property Name="BaslangicZamani" Type="datetime" Nullable="false" />
-    <Property Name="BitisZamanı" Type="datetime" Nullable="false" />
+    <Property Name="BaslangicZamani" Type="datetime" />
+    <Property Name="BitisZamanı" Type="datetime" />
     <Property Name="KullanilanSure" Type="int" />
     <Property Name="Ucret" Type="decimal" Precision="10" Scale="2" />
-  </EntityType>
-  <EntityType Name="TableUcretlendirme">
-    <Key>
-      <PropertyRef Name="UcretID" />
-    </Key>
-    <Property Name="UcretID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="OturumID" Type="int" />
-    <Property Name="AcilisTipi" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <Association Name="FK_TableHareketler_TableKullanicilar">
     <End Role="TableKullanicilar" Type="Self.TableKullanicilar" Multiplicity="0..1" />
@@ -144,25 +137,41 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TableUcretlendirme_TableOturumlar">
-    <End Role="TableOturumlar" Type="Self.TableOturumlar" Multiplicity="0..1" />
-    <End Role="TableUcretlendirme" Type="Self.TableUcretlendirme" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TableOturumlar">
-        <PropertyRef Name="OturumID" />
-      </Principal>
-      <Dependent Role="TableUcretlendirme">
-        <PropertyRef Name="OturumID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
   <EntityContainer Name="NetCafeSystemModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TableHareketler" EntityType="Self.TableHareketler" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TableKullanicilar" EntityType="Self.TableKullanicilar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TableMasalar" EntityType="Self.TableMasalar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TableOturumlar" EntityType="Self.TableOturumlar" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TableUcretlendirme" EntityType="Self.TableUcretlendirme" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_TableHareketler_TableKullanicilar" Association="Self.FK_TableHareketler_TableKullanicilar">
       <End Role="TableKullanicilar" EntitySet="TableKullanicilar" />
       <End Role="TableHareketler" EntitySet="TableHareketler" />
@@ -190,10 +199,6 @@
     <AssociationSet Name="FK_TableOturumlar_TableMasalar" Association="Self.FK_TableOturumlar_TableMasalar">
       <End Role="TableMasalar" EntitySet="TableMasalar" />
       <End Role="TableOturumlar" EntitySet="TableOturumlar" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TableUcretlendirme_TableOturumlar" Association="Self.FK_TableUcretlendirme_TableOturumlar">
-      <End Role="TableOturumlar" EntitySet="TableOturumlar" />
-      <End Role="TableUcretlendirme" EntitySet="TableUcretlendirme" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

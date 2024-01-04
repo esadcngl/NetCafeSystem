@@ -10,14 +10,10 @@
 namespace İnternetCafeSistemi
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class TableUcretlendirme
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int UcretID { get; set; }
-        public Nullable<int> OturumID { get; set; }
-        public string AcilisTipi { get; set; }
-    
-        public virtual TableOturumlar TableOturumlar { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

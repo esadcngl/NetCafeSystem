@@ -33,7 +33,8 @@
     <Property Name="Sifre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Mail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="IstekDurum" Type="Int32" />
+    <Property Name="IstekDurum" Type="Int32" Nullable="false" />
+    <Property Name="MasaID" Type="Int32" />
     <NavigationProperty Name="TableHareketler" Relationship="Self.FK_TableHareketler_TableKullanicilar" FromRole="TableKullanicilar" ToRole="TableHareketler" />
     <NavigationProperty Name="TableHareketler1" Relationship="Self.FK_TableHareketler_TableKullanicilar1" FromRole="TableKullanicilar" ToRole="TableHareketler" />
     <NavigationProperty Name="TableMasalar" Relationship="Self.FK_TableMasalar_TableKullanicilar" FromRole="TableKullanicilar" ToRole="TableMasalar" />
@@ -59,22 +60,12 @@
     <Property Name="OturumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="KullaniciID" Type="Int32" />
     <Property Name="MasaID" Type="Int32" />
-    <Property Name="BaslangicZamani" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="BitisZamanı" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BaslangicZamani" Type="DateTime" Precision="3" />
+    <Property Name="BitisZamanı" Type="DateTime" Precision="3" />
     <Property Name="KullanilanSure" Type="Int32" />
     <Property Name="Ucret" Type="Decimal" Precision="10" Scale="2" />
     <NavigationProperty Name="TableKullanicilar" Relationship="Self.FK_TableOturumlar_TableKullanicilar" FromRole="TableOturumlar" ToRole="TableKullanicilar" />
     <NavigationProperty Name="TableMasalar" Relationship="Self.FK_TableOturumlar_TableMasalar" FromRole="TableOturumlar" ToRole="TableMasalar" />
-    <NavigationProperty Name="TableUcretlendirme" Relationship="Self.FK_TableUcretlendirme_TableOturumlar" FromRole="TableOturumlar" ToRole="TableUcretlendirme" />
-  </EntityType>
-  <EntityType Name="TableUcretlendirme">
-    <Key>
-      <PropertyRef Name="UcretID" />
-    </Key>
-    <Property Name="UcretID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="OturumID" Type="Int32" />
-    <Property Name="AcilisTipi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="TableOturumlar" Relationship="Self.FK_TableUcretlendirme_TableOturumlar" FromRole="TableUcretlendirme" ToRole="TableOturumlar" />
   </EntityType>
   <Association Name="FK_TableHareketler_TableKullanicilar">
     <End Role="TableKullanicilar" Type="Self.TableKullanicilar" Multiplicity="0..1" />
@@ -160,25 +151,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TableUcretlendirme_TableOturumlar">
-    <End Role="TableOturumlar" Type="Self.TableOturumlar" Multiplicity="0..1" />
-    <End Role="TableUcretlendirme" Type="Self.TableUcretlendirme" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TableOturumlar">
-        <PropertyRef Name="OturumID" />
-      </Principal>
-      <Dependent Role="TableUcretlendirme">
-        <PropertyRef Name="OturumID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="NetCafeSystemEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <EntitySet Name="TableHareketler" EntityType="Self.TableHareketler" />
     <EntitySet Name="TableKullanicilar" EntityType="Self.TableKullanicilar" />
     <EntitySet Name="TableMasalar" EntityType="Self.TableMasalar" />
     <EntitySet Name="TableOturumlar" EntityType="Self.TableOturumlar" />
-    <EntitySet Name="TableUcretlendirme" EntityType="Self.TableUcretlendirme" />
     <AssociationSet Name="FK_TableHareketler_TableKullanicilar" Association="Self.FK_TableHareketler_TableKullanicilar">
       <End Role="TableKullanicilar" EntitySet="TableKullanicilar" />
       <End Role="TableHareketler" EntitySet="TableHareketler" />
@@ -207,9 +185,45 @@
       <End Role="TableMasalar" EntitySet="TableMasalar" />
       <End Role="TableOturumlar" EntitySet="TableOturumlar" />
     </AssociationSet>
-    <AssociationSet Name="FK_TableUcretlendirme_TableOturumlar" Association="Self.FK_TableUcretlendirme_TableOturumlar">
-      <End Role="TableOturumlar" EntitySet="TableOturumlar" />
-      <End Role="TableUcretlendirme" EntitySet="TableUcretlendirme" />
-    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(NetCafeSystemModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(NetCafeSystemModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
 </Schema>

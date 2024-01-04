@@ -4,13 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="063803eda15942108f01a5846f4b50a8" Name="Diagram1">
+      <Diagram DiagramId="4515d277953b44e79b307b0c2170afe1" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="NetCafeSystemModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NetCafeSystemModel.TableHareketler" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NetCafeSystemModel.TableKullanicilar" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="NetCafeSystemModel.TableMasalar" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NetCafeSystemModel.TableHareketler" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NetCafeSystemModel.TableKullanicilar" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NetCafeSystemModel.TableMasalar" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="NetCafeSystemModel.TableOturumlar" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NetCafeSystemModel.TableUcretlendirme" Width="1.5" PointX="10.5" PointY="5.125" IsExpanded="true" />
         <AssociationConnector Association="NetCafeSystemModel.FK_TableHareketler_TableKullanicilar" ManuallyRouted="false" />
         <AssociationConnector Association="NetCafeSystemModel.FK_TableHareketler_TableKullanicilar1" ManuallyRouted="false" />
         <AssociationConnector Association="NetCafeSystemModel.FK_TableHareketler_TableMasalar" ManuallyRouted="false" />
@@ -18,7 +17,6 @@
         <AssociationConnector Association="NetCafeSystemModel.FK_TableMasalar_TableKullanicilar" ManuallyRouted="false" />
         <AssociationConnector Association="NetCafeSystemModel.FK_TableOturumlar_TableKullanicilar" ManuallyRouted="false" />
         <AssociationConnector Association="NetCafeSystemModel.FK_TableOturumlar_TableMasalar" ManuallyRouted="false" />
-        <AssociationConnector Association="NetCafeSystemModel.FK_TableUcretlendirme_TableOturumlar" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

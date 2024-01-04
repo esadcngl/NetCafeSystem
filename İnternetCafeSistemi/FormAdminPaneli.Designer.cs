@@ -31,9 +31,15 @@
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.labelDate = new System.Windows.Forms.Label();
+            this.LabelClock = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelMasaInfo = new System.Windows.Forms.Panel();
+            this.txtKullanici = new System.Windows.Forms.TextBox();
+            this.labelKullanici = new System.Windows.Forms.Label();
+            this.txtKullaniciID = new System.Windows.Forms.TextBox();
+            this.labelKullaniciID = new System.Windows.Forms.Label();
             this.btnMasaAc = new System.Windows.Forms.Button();
             this.txtMasaDurumu = new System.Windows.Forms.TextBox();
             this.txtMasaAdı = new System.Windows.Forms.TextBox();
@@ -45,24 +51,21 @@
             this.tabPageMenü = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dataGridViewKullanici = new System.Windows.Forms.DataGridView();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnMasaOlustur = new System.Windows.Forms.Button();
-            this.dataGridViewKullanici = new System.Windows.Forms.DataGridView();
-            this.txtKullaniciID = new System.Windows.Forms.TextBox();
-            this.labelKullaniciID = new System.Windows.Forms.Label();
-            this.txtKullanici = new System.Windows.Forms.TextBox();
-            this.labelKullanici = new System.Windows.Forms.Label();
-            this.LabelClock = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.labelDate = new System.Windows.Forms.Label();
+            this.radioSüreli = new System.Windows.Forms.RadioButton();
+            this.radioSüresiz = new System.Windows.Forms.RadioButton();
+            this.comboSüreli = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelMasaInfo.SuspendLayout();
             this.Tabs.SuspendLayout();
             this.tabPageMenü.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewKullanici)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -85,6 +88,25 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(161, 44);
             this.panel2.TabIndex = 2;
+            // 
+            // labelDate
+            // 
+            this.labelDate.AutoSize = true;
+            this.labelDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.labelDate.Location = new System.Drawing.Point(4, 26);
+            this.labelDate.Name = "labelDate";
+            this.labelDate.Size = new System.Drawing.Size(0, 20);
+            this.labelDate.TabIndex = 1;
+            // 
+            // LabelClock
+            // 
+            this.LabelClock.AutoSize = true;
+            this.LabelClock.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LabelClock.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.LabelClock.Location = new System.Drawing.Point(0, 0);
+            this.LabelClock.Name = "LabelClock";
+            this.LabelClock.Size = new System.Drawing.Size(0, 20);
+            this.LabelClock.TabIndex = 0;
             // 
             // label2
             // 
@@ -109,6 +131,9 @@
             // panelMasaInfo
             // 
             this.panelMasaInfo.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panelMasaInfo.Controls.Add(this.comboSüreli);
+            this.panelMasaInfo.Controls.Add(this.radioSüresiz);
+            this.panelMasaInfo.Controls.Add(this.radioSüreli);
             this.panelMasaInfo.Controls.Add(this.txtKullanici);
             this.panelMasaInfo.Controls.Add(this.labelKullanici);
             this.panelMasaInfo.Controls.Add(this.txtKullaniciID);
@@ -124,6 +149,42 @@
             this.panelMasaInfo.Name = "panelMasaInfo";
             this.panelMasaInfo.Size = new System.Drawing.Size(207, 255);
             this.panelMasaInfo.TabIndex = 1;
+            // 
+            // txtKullanici
+            // 
+            this.txtKullanici.Location = new System.Drawing.Point(113, 145);
+            this.txtKullanici.Name = "txtKullanici";
+            this.txtKullanici.ReadOnly = true;
+            this.txtKullanici.Size = new System.Drawing.Size(78, 20);
+            this.txtKullanici.TabIndex = 10;
+            // 
+            // labelKullanici
+            // 
+            this.labelKullanici.AutoSize = true;
+            this.labelKullanici.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelKullanici.Location = new System.Drawing.Point(48, 145);
+            this.labelKullanici.Name = "labelKullanici";
+            this.labelKullanici.Size = new System.Drawing.Size(67, 19);
+            this.labelKullanici.TabIndex = 9;
+            this.labelKullanici.Text = "Kullanıcı:";
+            // 
+            // txtKullaniciID
+            // 
+            this.txtKullaniciID.Location = new System.Drawing.Point(114, 117);
+            this.txtKullaniciID.Name = "txtKullaniciID";
+            this.txtKullaniciID.ReadOnly = true;
+            this.txtKullaniciID.Size = new System.Drawing.Size(78, 20);
+            this.txtKullaniciID.TabIndex = 8;
+            // 
+            // labelKullaniciID
+            // 
+            this.labelKullaniciID.AutoSize = true;
+            this.labelKullaniciID.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelKullaniciID.Location = new System.Drawing.Point(30, 118);
+            this.labelKullaniciID.Name = "labelKullaniciID";
+            this.labelKullaniciID.Size = new System.Drawing.Size(85, 19);
+            this.labelKullaniciID.TabIndex = 7;
+            this.labelKullaniciID.Text = "Kullanıcı ID:";
             // 
             // btnMasaAc
             // 
@@ -234,8 +295,17 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "ÜYELER";
             // 
+            // dataGridViewKullanici
+            // 
+            this.dataGridViewKullanici.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewKullanici.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewKullanici.Name = "dataGridViewKullanici";
+            this.dataGridViewKullanici.Size = new System.Drawing.Size(341, 230);
+            this.dataGridViewKullanici.TabIndex = 0;
+            // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(210, 304);
             this.dataGridView1.Name = "dataGridView1";
@@ -252,74 +322,50 @@
             this.btnMasaOlustur.UseVisualStyleBackColor = true;
             this.btnMasaOlustur.Click += new System.EventHandler(this.btnMasaOlustur_Click);
             // 
-            // dataGridViewKullanici
-            // 
-            this.dataGridViewKullanici.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewKullanici.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewKullanici.Name = "dataGridViewKullanici";
-            this.dataGridViewKullanici.Size = new System.Drawing.Size(341, 230);
-            this.dataGridViewKullanici.TabIndex = 0;
-            // 
-            // txtKullaniciID
-            // 
-            this.txtKullaniciID.Location = new System.Drawing.Point(114, 117);
-            this.txtKullaniciID.Name = "txtKullaniciID";
-            this.txtKullaniciID.ReadOnly = true;
-            this.txtKullaniciID.Size = new System.Drawing.Size(78, 20);
-            this.txtKullaniciID.TabIndex = 8;
-            // 
-            // labelKullaniciID
-            // 
-            this.labelKullaniciID.AutoSize = true;
-            this.labelKullaniciID.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelKullaniciID.Location = new System.Drawing.Point(30, 118);
-            this.labelKullaniciID.Name = "labelKullaniciID";
-            this.labelKullaniciID.Size = new System.Drawing.Size(85, 19);
-            this.labelKullaniciID.TabIndex = 7;
-            this.labelKullaniciID.Text = "Kullanıcı ID:";
-            // 
-            // txtKullanici
-            // 
-            this.txtKullanici.Location = new System.Drawing.Point(113, 145);
-            this.txtKullanici.Name = "txtKullanici";
-            this.txtKullanici.ReadOnly = true;
-            this.txtKullanici.Size = new System.Drawing.Size(78, 20);
-            this.txtKullanici.TabIndex = 10;
-            // 
-            // labelKullanici
-            // 
-            this.labelKullanici.AutoSize = true;
-            this.labelKullanici.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelKullanici.Location = new System.Drawing.Point(48, 145);
-            this.labelKullanici.Name = "labelKullanici";
-            this.labelKullanici.Size = new System.Drawing.Size(67, 19);
-            this.labelKullanici.TabIndex = 9;
-            this.labelKullanici.Text = "Kullanıcı:";
-            // 
-            // LabelClock
-            // 
-            this.LabelClock.AutoSize = true;
-            this.LabelClock.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LabelClock.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.LabelClock.Location = new System.Drawing.Point(0, 0);
-            this.LabelClock.Name = "LabelClock";
-            this.LabelClock.Size = new System.Drawing.Size(0, 20);
-            this.LabelClock.TabIndex = 0;
-            // 
             // timer1
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // labelDate
+            // radioSüreli
             // 
-            this.labelDate.AutoSize = true;
-            this.labelDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.labelDate.Location = new System.Drawing.Point(4, 26);
-            this.labelDate.Name = "labelDate";
-            this.labelDate.Size = new System.Drawing.Size(0, 20);
-            this.labelDate.TabIndex = 1;
+            this.radioSüreli.AutoSize = true;
+            this.radioSüreli.Location = new System.Drawing.Point(45, 171);
+            this.radioSüreli.Name = "radioSüreli";
+            this.radioSüreli.Size = new System.Drawing.Size(51, 17);
+            this.radioSüreli.TabIndex = 11;
+            this.radioSüreli.TabStop = true;
+            this.radioSüreli.Text = "Süreli";
+            this.radioSüreli.UseVisualStyleBackColor = true;
+            this.radioSüreli.CheckedChanged += new System.EventHandler(this.SecileneGöre);
+            // 
+            // radioSüresiz
+            // 
+            this.radioSüresiz.AutoSize = true;
+            this.radioSüresiz.Location = new System.Drawing.Point(113, 171);
+            this.radioSüresiz.Name = "radioSüresiz";
+            this.radioSüresiz.Size = new System.Drawing.Size(59, 17);
+            this.radioSüresiz.TabIndex = 12;
+            this.radioSüresiz.TabStop = true;
+            this.radioSüresiz.Text = "Süresiz";
+            this.radioSüresiz.UseVisualStyleBackColor = true;
+            this.radioSüresiz.CheckedChanged += new System.EventHandler(this.SecileneGöre);
+            // 
+            // comboSüreli
+            // 
+            this.comboSüreli.FormattingEnabled = true;
+            this.comboSüreli.Items.AddRange(new object[] {
+            "15",
+            "30",
+            "45",
+            "60",
+            "120",
+            "180"});
+            this.comboSüreli.Location = new System.Drawing.Point(60, 193);
+            this.comboSüreli.Name = "comboSüreli";
+            this.comboSüreli.Size = new System.Drawing.Size(89, 21);
+            this.comboSüreli.TabIndex = 13;
             // 
             // FormAdminPaneli
             // 
@@ -342,8 +388,8 @@
             this.Tabs.ResumeLayout(false);
             this.tabPageMenü.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewKullanici)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -376,5 +422,8 @@
         private System.Windows.Forms.Label LabelClock;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label labelDate;
+        private System.Windows.Forms.ComboBox comboSüreli;
+        private System.Windows.Forms.RadioButton radioSüresiz;
+        private System.Windows.Forms.RadioButton radioSüreli;
     }
 }

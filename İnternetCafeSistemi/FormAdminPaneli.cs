@@ -14,14 +14,15 @@ namespace İnternetCafeSistemi
     {
         NetCafeSystemEntities netCafeDB = new NetCafeSystemEntities();
         private List<Button> masalar = new List<Button>();
-        
+        RadioButton radioSecilen;
         public FormAdminPaneli()
         {
             Properties.Settings.Default.Save();
             InitializeComponent();
             LoadMasalar();
             panelMasaInfo.Visible = false;
-            dataGridViewDoldur();
+            dataGridViewKullaniciDoldur();
+            dataGridViewLogDoldur();
             LabelClock.Text = DateTime.Now.ToLongTimeString();
             labelDate.Text = DateTime.Now.ToLongDateString();
             timer1.Start();
@@ -33,7 +34,7 @@ namespace İnternetCafeSistemi
             // Butonun özelliklerini belirle
             yeniMasa.Text = "Masa-" + (flowLayoutPanel1.Controls.Count + 1).ToString();
             yeniMasa.TextAlign = ContentAlignment.BottomCenter;
-            yeniMasa.Image = Image.FromFile("C:\\Users\\Esadcngl\\Desktop\\İnternetCafeSistemi\\desktop.png");
+            yeniMasa.Image = Image.FromFile("C:\\Users\\Esadcngl\\Desktop\\NetCafeSystem\\İnternetCafeSistemi\\desktop.png");
             yeniMasa.ImageAlign = ContentAlignment.TopCenter;
             yeniMasa.Width = 75;
             yeniMasa.Height = 85;
@@ -66,10 +67,13 @@ namespace İnternetCafeSistemi
                 }else if(dbMasa.Durumu == "DOLU")
                 {
                     masaButonu.BackColor = Color.Red;
+                } else if(dbMasa.Durumu == "İSTEK")
+                {
+                    masaButonu.BackColor= Color.Orange;
                 }
                 masaButonu.Text = dbMasa.MasaAdi;
                 masaButonu.TextAlign = ContentAlignment.BottomCenter;
-                masaButonu.Image = Image.FromFile("C:\\Users\\Esadcngl\\Desktop\\İnternetCafeSistemi\\desktop.png");
+                masaButonu.Image = Image.FromFile("C:\\Users\\Esadcngl\\Desktop\\NetCafeSystem\\İnternetCafeSistemi\\desktop.png");
                 masaButonu.ImageAlign = ContentAlignment.TopCenter;
                 masaButonu.Width = 75;
                 masaButonu.Height = 85;
@@ -91,7 +95,7 @@ namespace İnternetCafeSistemi
                 TableMasalar masa = netCafeDB.TableMasalar.FirstOrDefault(m => m.MasaAdi == masaAdi);
 
                 // panelMasaInfo'yu güncelle ve görünür yap
-                if (masa != null)
+                if (masa.Durumu=="İSTEK" || masa.Durumu=="BOŞ")
                 {
                     txtMasaID.Text = masa.MasaID.ToString();
                     txtMasaAdı.Text = masa.MasaAdi;
@@ -103,11 +107,21 @@ namespace İnternetCafeSistemi
                     panelMasaInfo.Visible = true;
                     if (masa.Durumu =="İSTEK")
                     {
+                        txtKullaniciID.Text = masa.KullaniciID.ToString();
+                        string kullaniciAdi = netCafeDB.TableKullanicilar
+                                    .Where(k => k.KullaniciID == masa.KullaniciID)
+                                    .Select(k => k.KullaniciAdi)
+                                    .FirstOrDefault();
+                        txtKullanici.Text = kullaniciAdi;
                         labelKullaniciID.Visible = true;
                         txtKullaniciID.Visible = true;
                         txtKullanici.Visible = true;
                         labelKullanici.Visible = true;
                     }
+                }
+                else
+                {
+
                 }
             }
         }
@@ -117,7 +131,7 @@ namespace İnternetCafeSistemi
             panelMasaInfo.Visible = false;
         }
 
-        private void dataGridViewDoldur()
+        private void dataGridViewKullaniciDoldur()
         {
             var query = from item in netCafeDB.TableKullanicilar
                         select new
@@ -127,12 +141,45 @@ namespace İnternetCafeSistemi
                             item.KayitTarihi,
                         };
             dataGridViewKullanici.DataSource = query.ToList();
+          
+        }
+        private void dataGridViewLogDoldur()
+        {
+            var query = from hareket in netCafeDB.TableHareketler
+                        join kullanici in netCafeDB.TableKullanicilar on hareket.KullaniciID equals kullanici.KullaniciID
+                        join masa in netCafeDB.TableMasalar on hareket.MasaID equals masa.MasaID
+                        select new
+                        {
+                            MasaAdi = masa.MasaAdi,
+                            KullaniciAdi = kullanici.KullaniciAdi,
+                            IslemTuru = hareket.IslemTuru,
+                            IslemZamani = hareket.IslemZamani
+                        };
+
+            dataGridView1.DataSource = query.ToList();
+            
         }
 
         private void btnMasaAc_Click(object sender, EventArgs e)
         {
-            FormMasaAc formMasaAc = new FormMasaAc();
-            formMasaAc.ShowDialog();
+            int masaID = Convert.ToInt32(txtMasaID.Text);
+            TableMasalar masa = netCafeDB.TableMasalar.FirstOrDefault(m => m.MasaID == masaID);
+            masa.Durumu = "DOLU";
+            masalar[masaID - 1].BackColor = Color.Red;
+
+            TableOturumlar oturum = new TableOturumlar();
+            oturum.KullaniciID = Convert.ToInt16(txtKullaniciID.Text.Trim());
+            oturum.MasaID = masaID;
+            oturum.BaslangicZamani = DateTime.Now;
+            netCafeDB.TableOturumlar.Add(oturum);
+            netCafeDB.SaveChanges();
+            TableHareketler Hareket = new TableHareketler();
+            Hareket.KullaniciID = Convert.ToInt32(txtKullaniciID.Text);
+            Hareket.MasaID = masaID;
+            Hareket.IslemTuru = "MASA AÇMA";
+            Hareket.IslemZamani = DateTime.Now;
+            netCafeDB.TableHareketler.Add(Hareket);
+            netCafeDB.SaveChanges();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -140,7 +187,19 @@ namespace İnternetCafeSistemi
             LabelClock.Text = DateTime.Now.ToLongTimeString();
         }
 
-        
+        private void SecileneGöre(object sender, EventArgs e)
+        {
+            radioSecilen = sender as RadioButton;
+
+            if (radioSecilen == radioSüreli)
+            {
+                comboSüreli.Visible = true;
+            }
+            else
+            {
+                comboSüreli.Visible = false;
+            }
+        }
     }
 }
 

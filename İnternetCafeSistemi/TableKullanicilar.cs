@@ -28,7 +28,8 @@ namespace İnternetCafeSistemi
         public string Sifre { get; set; }
         public string Mail { get; set; }
         public System.DateTime KayitTarihi { get; set; }
-        public Nullable<int> IstekDurum { get; set; }
+        public int IstekDurum { get; set; }
+        public Nullable<int> MasaID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TableHareketler> TableHareketler { get; set; }
