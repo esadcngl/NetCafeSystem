@@ -93,7 +93,8 @@ namespace İnternetCafeSistemi
                 // Masanın adını kullanarak veritabanından bilgileri al
                 string masaAdi = clickedButton.Text;
                 TableMasalar masa = netCafeDB.TableMasalar.FirstOrDefault(m => m.MasaAdi == masaAdi);
-
+               
+                //TableOturumlar oturum = netCafeDB.TableOturumlar.FirstOrDefault(o => o.MasaID == masaID);
                 // panelMasaInfo'yu güncelle ve görünür yap
                 if (masa.Durumu=="İSTEK" || masa.Durumu=="BOŞ")
                 {
@@ -121,7 +122,22 @@ namespace İnternetCafeSistemi
                 }
                 else
                 {
-
+                    int MasaID = masa.MasaID;
+                    TableOturumlar oturum = netCafeDB.TableOturumlar.FirstOrDefault(o => o.MasaID == MasaID);
+                    string kullaniciAdi = netCafeDB.TableKullanicilar
+                              .Where(k => k.KullaniciID == oturum.KullaniciID)
+                              .Select(k => k.KullaniciAdi)
+                              .FirstOrDefault();
+                    txtMasaID.Text = masa.MasaID.ToString();
+                    txtMasaAdı.Text = masa.MasaAdi;
+                    txtMasaDurumu.Text = masa.Durumu;
+                    txtKullaniciID.Text = oturum.KullaniciID.ToString();
+                    txtKullanici.Text = kullaniciAdi;
+                    radioSüresiz.Visible = false;
+                    radioSüreli.Visible = false;
+                    btnMasaAc.Visible = false;
+                    comboSüreli.Visible = false;
+                    panelMasaInfo.Visible = true;
                 }
             }
         }
@@ -168,7 +184,7 @@ namespace İnternetCafeSistemi
             masalar[masaID - 1].BackColor = Color.Red;
 
             TableOturumlar oturum = new TableOturumlar();
-            oturum.KullaniciID = Convert.ToInt16(txtKullaniciID.Text.Trim());
+            oturum.KullaniciID = Convert.ToInt32(txtKullaniciID.Text);
             oturum.MasaID = masaID;
             oturum.BaslangicZamani = DateTime.Now;
             netCafeDB.TableOturumlar.Add(oturum);

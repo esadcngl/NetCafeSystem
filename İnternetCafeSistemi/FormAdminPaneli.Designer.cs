@@ -36,6 +36,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelMasaInfo = new System.Windows.Forms.Panel();
+            this.comboSüreli = new System.Windows.Forms.ComboBox();
+            this.radioSüresiz = new System.Windows.Forms.RadioButton();
+            this.radioSüreli = new System.Windows.Forms.RadioButton();
             this.txtKullanici = new System.Windows.Forms.TextBox();
             this.labelKullanici = new System.Windows.Forms.Label();
             this.txtKullaniciID = new System.Windows.Forms.TextBox();
@@ -55,9 +58,6 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnMasaOlustur = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.radioSüreli = new System.Windows.Forms.RadioButton();
-            this.radioSüresiz = new System.Windows.Forms.RadioButton();
-            this.comboSüreli = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelMasaInfo.SuspendLayout();
@@ -149,6 +149,45 @@
             this.panelMasaInfo.Name = "panelMasaInfo";
             this.panelMasaInfo.Size = new System.Drawing.Size(207, 255);
             this.panelMasaInfo.TabIndex = 1;
+            // 
+            // comboSüreli
+            // 
+            this.comboSüreli.FormattingEnabled = true;
+            this.comboSüreli.Items.AddRange(new object[] {
+            "15",
+            "30",
+            "45",
+            "60",
+            "120",
+            "180"});
+            this.comboSüreli.Location = new System.Drawing.Point(60, 193);
+            this.comboSüreli.Name = "comboSüreli";
+            this.comboSüreli.Size = new System.Drawing.Size(89, 21);
+            this.comboSüreli.TabIndex = 13;
+            // 
+            // radioSüresiz
+            // 
+            this.radioSüresiz.AutoSize = true;
+            this.radioSüresiz.Location = new System.Drawing.Point(113, 171);
+            this.radioSüresiz.Name = "radioSüresiz";
+            this.radioSüresiz.Size = new System.Drawing.Size(59, 17);
+            this.radioSüresiz.TabIndex = 12;
+            this.radioSüresiz.TabStop = true;
+            this.radioSüresiz.Text = "Süresiz";
+            this.radioSüresiz.UseVisualStyleBackColor = true;
+            this.radioSüresiz.CheckedChanged += new System.EventHandler(this.SecileneGöre);
+            // 
+            // radioSüreli
+            // 
+            this.radioSüreli.AutoSize = true;
+            this.radioSüreli.Location = new System.Drawing.Point(45, 171);
+            this.radioSüreli.Name = "radioSüreli";
+            this.radioSüreli.Size = new System.Drawing.Size(51, 17);
+            this.radioSüreli.TabIndex = 11;
+            this.radioSüreli.TabStop = true;
+            this.radioSüreli.Text = "Süreli";
+            this.radioSüreli.UseVisualStyleBackColor = true;
+            this.radioSüreli.CheckedChanged += new System.EventHandler(this.SecileneGöre);
             // 
             // txtKullanici
             // 
@@ -314,7 +353,7 @@
             // 
             // btnMasaOlustur
             // 
-            this.btnMasaOlustur.Location = new System.Drawing.Point(51, 341);
+            this.btnMasaOlustur.Location = new System.Drawing.Point(51, 391);
             this.btnMasaOlustur.Name = "btnMasaOlustur";
             this.btnMasaOlustur.Size = new System.Drawing.Size(101, 47);
             this.btnMasaOlustur.TabIndex = 4;
@@ -327,45 +366,6 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // radioSüreli
-            // 
-            this.radioSüreli.AutoSize = true;
-            this.radioSüreli.Location = new System.Drawing.Point(45, 171);
-            this.radioSüreli.Name = "radioSüreli";
-            this.radioSüreli.Size = new System.Drawing.Size(51, 17);
-            this.radioSüreli.TabIndex = 11;
-            this.radioSüreli.TabStop = true;
-            this.radioSüreli.Text = "Süreli";
-            this.radioSüreli.UseVisualStyleBackColor = true;
-            this.radioSüreli.CheckedChanged += new System.EventHandler(this.SecileneGöre);
-            // 
-            // radioSüresiz
-            // 
-            this.radioSüresiz.AutoSize = true;
-            this.radioSüresiz.Location = new System.Drawing.Point(113, 171);
-            this.radioSüresiz.Name = "radioSüresiz";
-            this.radioSüresiz.Size = new System.Drawing.Size(59, 17);
-            this.radioSüresiz.TabIndex = 12;
-            this.radioSüresiz.TabStop = true;
-            this.radioSüresiz.Text = "Süresiz";
-            this.radioSüresiz.UseVisualStyleBackColor = true;
-            this.radioSüresiz.CheckedChanged += new System.EventHandler(this.SecileneGöre);
-            // 
-            // comboSüreli
-            // 
-            this.comboSüreli.FormattingEnabled = true;
-            this.comboSüreli.Items.AddRange(new object[] {
-            "15",
-            "30",
-            "45",
-            "60",
-            "120",
-            "180"});
-            this.comboSüreli.Location = new System.Drawing.Point(60, 193);
-            this.comboSüreli.Name = "comboSüreli";
-            this.comboSüreli.Size = new System.Drawing.Size(89, 21);
-            this.comboSüreli.TabIndex = 13;
             // 
             // FormAdminPaneli
             // 
