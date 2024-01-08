@@ -114,6 +114,9 @@
     <Compile Include="TableOturumlar.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="TableSatis.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormAdminPaneli.resx">
       <DependentUpon>FormAdminPaneli.cs</DependentUpon>
     </EmbeddedResource>

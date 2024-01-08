@@ -12,18 +12,15 @@ namespace İnternetCafeSistemi
     using System;
     using System.Collections.Generic;
     
-    public partial class TableOturumlar
+    public partial class TableSatis
     {
-        public int OturumID { get; set; }
+        public int SatısID { get; set; }
         public Nullable<int> KullaniciID { get; set; }
         public Nullable<int> MasaID { get; set; }
         public Nullable<System.DateTime> BaslangicZamani { get; set; }
-        public Nullable<System.DateTime> BitisZamanı { get; set; }
-        public Nullable<int> KullanilanSure { get; set; }
-        public Nullable<decimal> Ucret { get; set; }
+        public Nullable<System.DateTime> BitisZamani { get; set; }
         public string AcilisTuru { get; set; }
-    
-        public virtual TableKullanicilar TableKullanicilar { get; set; }
-        public virtual TableMasalar TableMasalar { get; set; }
+        public Nullable<int> KullanilanSüre { get; set; }
+        public Nullable<decimal> Ucret { get; set; }
     }
 }

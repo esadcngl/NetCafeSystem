@@ -50,7 +50,21 @@
     <Property Name="MasaID" Type="int" />
     <Property Name="BaslangicZamani" Type="datetime" />
     <Property Name="BitisZamanı" Type="datetime" />
+    <Property Name="AcilisTuru" Type="varchar" MaxLength="50" />
     <Property Name="KullanilanSure" Type="int" />
+    <Property Name="Ucret" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="TableSatis">
+    <Key>
+      <PropertyRef Name="SatısID" />
+    </Key>
+    <Property Name="SatısID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciID" Type="int" />
+    <Property Name="MasaID" Type="int" />
+    <Property Name="BaslangicZamani" Type="datetime" />
+    <Property Name="BitisZamani" Type="datetime" />
+    <Property Name="AcilisTuru" Type="varchar" MaxLength="50" />
+    <Property Name="KullanilanSüre" Type="int" />
     <Property Name="Ucret" Type="decimal" Precision="10" Scale="2" />
   </EntityType>
   <Association Name="FK_TableHareketler_TableKullanicilar">
@@ -172,6 +186,7 @@
     <EntitySet Name="TableKullanicilar" EntityType="Self.TableKullanicilar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TableMasalar" EntityType="Self.TableMasalar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TableOturumlar" EntityType="Self.TableOturumlar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TableSatis" EntityType="Self.TableSatis" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_TableHareketler_TableKullanicilar" Association="Self.FK_TableHareketler_TableKullanicilar">
       <End Role="TableKullanicilar" EntitySet="TableKullanicilar" />
       <End Role="TableHareketler" EntitySet="TableHareketler" />

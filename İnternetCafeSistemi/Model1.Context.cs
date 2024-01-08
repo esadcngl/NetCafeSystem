@@ -32,6 +32,7 @@ namespace İnternetCafeSistemi
         public virtual DbSet<TableKullanicilar> TableKullanicilar { get; set; }
         public virtual DbSet<TableMasalar> TableMasalar { get; set; }
         public virtual DbSet<TableOturumlar> TableOturumlar { get; set; }
+        public virtual DbSet<TableSatis> TableSatis { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

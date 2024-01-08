@@ -66,6 +66,7 @@
     <Property Name="Ucret" Type="Decimal" Precision="10" Scale="2" />
     <NavigationProperty Name="TableKullanicilar" Relationship="Self.FK_TableOturumlar_TableKullanicilar" FromRole="TableOturumlar" ToRole="TableKullanicilar" />
     <NavigationProperty Name="TableMasalar" Relationship="Self.FK_TableOturumlar_TableMasalar" FromRole="TableOturumlar" ToRole="TableMasalar" />
+    <Property Name="AcilisTuru" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_TableHareketler_TableKullanicilar">
     <End Role="TableKullanicilar" Type="Self.TableKullanicilar" Multiplicity="0..1" />
@@ -214,6 +215,7 @@
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="TableSatis" EntityType="NetCafeSystemModel.TableSatis" />
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -226,4 +228,17 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
+  <EntityType Name="TableSatis">
+    <Key>
+      <PropertyRef Name="SatısID" />
+    </Key>
+    <Property Name="SatısID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KullaniciID" Type="Int32" />
+    <Property Name="MasaID" Type="Int32" />
+    <Property Name="BaslangicZamani" Type="DateTime" Precision="3" />
+    <Property Name="BitisZamani" Type="DateTime" Precision="3" />
+    <Property Name="AcilisTuru" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="KullanilanSüre" Type="Int32" />
+    <Property Name="Ucret" Type="Decimal" Precision="10" Scale="2" />
+  </EntityType>
 </Schema>

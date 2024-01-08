@@ -49,6 +49,7 @@
     <EntitySetMapping Name="TableOturumlar">
       <EntityTypeMapping TypeName="NetCafeSystemModel.TableOturumlar">
         <MappingFragment StoreEntitySet="TableOturumlar">
+          <ScalarProperty Name="AcilisTuru" ColumnName="AcilisTuru" />
           <ScalarProperty Name="OturumID" ColumnName="OturumID" />
           <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
           <ScalarProperty Name="MasaID" ColumnName="MasaID" />
@@ -82,5 +83,19 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="NetCafeSystemModel.Store.sp_renamediagram" />
+    <EntitySetMapping Name="TableSatis">
+      <EntityTypeMapping TypeName="NetCafeSystemModel.TableSatis">
+        <MappingFragment StoreEntitySet="TableSatis">
+          <ScalarProperty Name="Ucret" ColumnName="Ucret" />
+          <ScalarProperty Name="KullanilanSüre" ColumnName="KullanilanSüre" />
+          <ScalarProperty Name="AcilisTuru" ColumnName="AcilisTuru" />
+          <ScalarProperty Name="BitisZamani" ColumnName="BitisZamani" />
+          <ScalarProperty Name="BaslangicZamani" ColumnName="BaslangicZamani" />
+          <ScalarProperty Name="MasaID" ColumnName="MasaID" />
+          <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+          <ScalarProperty Name="SatısID" ColumnName="SatısID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
