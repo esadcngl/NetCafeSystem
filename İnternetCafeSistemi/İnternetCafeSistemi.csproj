@@ -58,6 +58,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormAdminGirisi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAdminGirisi.Designer.cs">
+      <DependentUpon>FormAdminGirisi.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAdminPaneli.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,11 +76,35 @@
     <Compile Include="FormBaslangic.Designer.cs">
       <DependentUpon>FormBaslangic.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormKullaniciGirisi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKullaniciGirisi.Designer.cs">
+      <DependentUpon>FormKullaniciGirisi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormKullaniciIstek.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKullaniciIstek.Designer.cs">
+      <DependentUpon>FormKullaniciIstek.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMasaAc.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMasaAc.Designer.cs">
       <DependentUpon>FormMasaAc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMasaBilgisi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMasaBilgisi.Designer.cs">
+      <DependentUpon>FormMasaBilgisi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMasaSilme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMasaSilme.Designer.cs">
+      <DependentUpon>FormMasaSilme.cs</DependentUpon>
     </Compile>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -93,6 +123,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -100,6 +135,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TableAdminler.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="TableHareketler.cs">
@@ -117,24 +155,35 @@
     <Compile Include="TableSatis.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FormAdminGirisi.resx">
+      <DependentUpon>FormAdminGirisi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAdminPaneli.resx">
       <DependentUpon>FormAdminPaneli.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormBaslangic.resx">
       <DependentUpon>FormBaslangic.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormKullaniciGirisi.resx">
+      <DependentUpon>FormKullaniciGirisi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKullaniciIstek.resx">
+      <DependentUpon>FormKullaniciIstek.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMasaAc.resx">
       <DependentUpon>FormMasaAc.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormMasaBilgisi.resx">
+      <DependentUpon>FormMasaBilgisi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMasaSilme.resx">
+      <DependentUpon>FormMasaSilme.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -170,6 +219,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\group150.png" />
+    <None Include="Resources\admin180.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

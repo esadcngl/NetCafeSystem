@@ -15,6 +15,14 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="TableAdminler">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="varchar" MaxLength="50" />
+          <Property Name="Sifre" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="TableHareketler">
           <Key>
             <PropertyRef Name="HareketID" />
@@ -187,6 +195,7 @@
         </Function>
         <EntityContainer Name="NetCafeSystemModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TableAdminler" EntityType="Self.TableAdminler" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TableHareketler" EntityType="Self.TableHareketler" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TableKullanicilar" EntityType="Self.TableKullanicilar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TableMasalar" EntityType="Self.TableMasalar" Schema="dbo" store:Type="Tables" />
@@ -441,6 +450,7 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="TableSatis" EntityType="NetCafeSystemModel.TableSatis" />
+          <EntitySet Name="TableAdminler" EntityType="NetCafeSystemModel.TableAdminler" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -465,6 +475,14 @@
           <Property Name="AcilisTuru" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="KullanilanSüre" Type="Int32" />
           <Property Name="Ucret" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="TableAdminler">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -565,6 +583,15 @@
                 <ScalarProperty Name="MasaID" ColumnName="MasaID" />
                 <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
                 <ScalarProperty Name="SatısID" ColumnName="SatısID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TableAdminler">
+            <EntityTypeMapping TypeName="NetCafeSystemModel.TableAdminler">
+              <MappingFragment StoreEntitySet="TableAdminler">
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

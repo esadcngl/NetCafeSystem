@@ -28,20 +28,52 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.btnKullanıcıGiris = new System.Windows.Forms.Button();
+            this.btnAdminGiris = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // btnKullanıcıGiris
+            // 
+            this.btnKullanıcıGiris.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnKullanıcıGiris.Image = global::İnternetCafeSistemi.Properties.Resources.group150;
+            this.btnKullanıcıGiris.Location = new System.Drawing.Point(257, 71);
+            this.btnKullanıcıGiris.Name = "btnKullanıcıGiris";
+            this.btnKullanıcıGiris.Size = new System.Drawing.Size(200, 200);
+            this.btnKullanıcıGiris.TabIndex = 1;
+            this.btnKullanıcıGiris.Text = "Kullanıcı Girişi";
+            this.btnKullanıcıGiris.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnKullanıcıGiris.UseVisualStyleBackColor = true;
+            this.btnKullanıcıGiris.Click += new System.EventHandler(this.btnKullanıcıGiris_Click);
+            // 
+            // btnAdminGiris
+            // 
+            this.btnAdminGiris.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminGiris.Image = global::İnternetCafeSistemi.Properties.Resources.admin180;
+            this.btnAdminGiris.Location = new System.Drawing.Point(24, 71);
+            this.btnAdminGiris.Name = "btnAdminGiris";
+            this.btnAdminGiris.Size = new System.Drawing.Size(200, 200);
+            this.btnAdminGiris.TabIndex = 0;
+            this.btnAdminGiris.Text = "Admin Girişi";
+            this.btnAdminGiris.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAdminGiris.UseVisualStyleBackColor = true;
+            this.btnAdminGiris.Click += new System.EventHandler(this.btnAdminGiris_Click);
             // 
             // FormBaslangic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 450);
+            this.ClientSize = new System.Drawing.Size(484, 361);
+            this.Controls.Add(this.btnKullanıcıGiris);
+            this.Controls.Add(this.btnAdminGiris);
             this.Name = "FormBaslangic";
-            this.Text = "Form1";
+            this.Text = "FormBaslangic";
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnAdminGiris;
+        private System.Windows.Forms.Button btnKullanıcıGiris;
     }
 }
-

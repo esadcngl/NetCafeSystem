@@ -158,14 +158,14 @@ namespace İnternetCafeSistemi
 
         }
 
-        
-        
+
+
         private void Tabs_Click(object sender, EventArgs e)
         {
             panelMasaInfo.Visible = false;
             dataGridViewSatisDoldur();
-            
-               
+
+
         }
 
         private void dataGridViewKullaniciDoldur()
@@ -362,7 +362,7 @@ namespace İnternetCafeSistemi
                             oturum.KullanilanSure = yeniKullanilanSure;
                             netCafeDB.SaveChanges();
                             double baslangicUcreti = 5.0;
-                            
+
                             // Her 12 dakikada 2 TL artış
                             double dakikaBasiUcretArtisi = 2.0;
                             double ekUcret = Math.Ceiling(gecenSüre.TotalMinutes / 12.0) * dakikaBasiUcretArtisi;
@@ -395,7 +395,7 @@ namespace İnternetCafeSistemi
 
             // Oturumun süresini hesapla
             DateTime baslangicZamani = (DateTime)oturum.BaslangicZamani;
-            TimeSpan gecenSure =(TimeSpan)(oturum.BitisZamanı - baslangicZamani);
+            TimeSpan gecenSure = (TimeSpan)(oturum.BitisZamanı - baslangicZamani);
 
             // Kullanılan süreyi ve ücreti güncelle
             int kullanilanSure = (int)gecenSure.TotalMinutes;
@@ -456,8 +456,8 @@ namespace İnternetCafeSistemi
             // Masanın arayüzünü güncelle
             masalar[masaID - 1].BackColor = Color.LightGreen;
             panelMasaDoluInfo.Visible = false;
-            panelMasaInfo.Visible= false;
-            MessageBox.Show(masa.MasaAdi+"' süresi Doldu , Oturum başarıyla sonlandırıldı.");
+            panelMasaInfo.Visible = false;
+            MessageBox.Show(masa.MasaAdi + "' süresi Doldu , Oturum başarıyla sonlandırıldı.");
 
             // Veritabanındaki diğer tabloyu güncelleme, loglama, bildirim gönderme gibi işlemleri bu metoda ekleyebilirsiniz.
         }
@@ -512,6 +512,110 @@ namespace İnternetCafeSistemi
                 MessageBox.Show(masa.MasaAdi + " Başarılı bir şekilde kapatıldı.");
             }
             dataGridViewLogDoldur();
+        }
+
+        private void dataGridViewKullanici_SelectionChanged(object sender, EventArgs e)
+        {
+
+            if (dataGridViewKullanici.SelectedRows.Count > 0)
+            {
+                panelMasaInfo.Visible = true;
+                panelMasaDoluInfo.Visible = true;
+                panelKullanicilarInfo.Visible = true;
+                // DataGridView'de bir satır seçildiyse devam et
+                DataGridViewRow selectedRow = dataGridViewKullanici.SelectedRows[0];
+
+                // DataGridView'in Columns koleksiyonu üzerinden ilgili sütunların değerlerini alabilirsiniz
+                string kullaniciAdi = selectedRow.Cells["KullaniciAdi"].Value.ToString();
+               
+                TableKullanicilar kullanici = netCafeDB.TableKullanicilar
+        .FirstOrDefault(k => k.KullaniciAdi == kullaniciAdi);
+                txtKAdi2.Text = kullanici.KullaniciAdi;
+                txtSifre2.Text = kullanici.Sifre;
+                txtMail2.Text = kullanici.Mail;
+                txtKayitTarihi2.Text = kullanici.KayitTarihi.ToString();
+            }
+        }
+
+        private void btnÜyeSil_Click(object sender, EventArgs e)
+        {
+            string KullaniciAdi = txtKAdi2.Text;
+            TableKullanicilar kullanici = netCafeDB.TableKullanicilar.FirstOrDefault(k => k.KullaniciAdi == KullaniciAdi);
+
+            if (kullanici != null)
+            {
+                // Kullanıcıyı sil
+                netCafeDB.TableKullanicilar.Remove(kullanici);
+
+                // Değişiklikleri kaydet
+                netCafeDB.SaveChanges();
+
+                // Kullanıcı başarıyla silindi
+                MessageBox.Show("Kullanıcı başarıyla silindi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                // Kullanıcı bulunamadı
+                MessageBox.Show("Belirtilen kullanıcı bulunamadı.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            dataGridViewKullaniciDoldur();
+        }
+
+        private void btnÜyeEkle_Click(object sender, EventArgs e)
+        {
+            string yeniKullaniciAdi = txtYeniKullanici.Text;
+            string YeniSifre = txtYeniSifre.Text;
+            string YeniMail = txtYeniMail.Text;
+            // Kullanıcı adının veritabanında daha önce kullanılıp kullanılmadığını kontrol et
+            bool kullaniciVarMi = netCafeDB.TableKullanicilar.Any(k => k.KullaniciAdi == yeniKullaniciAdi);
+
+            if (kullaniciVarMi)
+            {
+                // Kullanıcı adı zaten varsa uyarı ver
+                MessageBox.Show("Bu kullanıcı adı zaten kullanılmaktadır. Lütfen farklı bir kullanıcı adı seçin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                // Kullanıcı adı kullanılmıyorsa yeni kullanıcı ekleyin
+                TableKullanicilar yeniKullanici = new TableKullanicilar
+                {
+                    KullaniciAdi = yeniKullaniciAdi,
+                    Mail = YeniMail,
+                    Sifre = YeniSifre,
+                    KayitTarihi = DateTime.Now,
+                    IstekDurum = 0,
+                };
+
+                // Yeni kullanıcıyı ekleyin
+                netCafeDB.TableKullanicilar.Add(yeniKullanici);
+
+                // Değişiklikleri kaydedin
+                netCafeDB.SaveChanges();
+
+                // Kullanıcı başarıyla eklendi
+                MessageBox.Show("Kullanıcı başarıyla eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dataGridViewKullaniciDoldur();
+            }
+        }
+
+        private void Tabs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Tabs.SelectedTab == tabPageUyeler || Tabs.SelectedTab == tabPageSatislar)
+            {
+                btnMasaOlustur.Visible = false;
+                btnMasaSil.Visible = false;
+            }
+            else
+            {
+                btnMasaOlustur.Visible = true;
+                btnMasaSil.Visible = true;
+            }  
+        }
+
+        private void btnMasaSil_Click(object sender, EventArgs e)
+        {
+            FormMasaSilme formMasaSilme = new FormMasaSilme();
+            formMasaSilme.ShowDialog();
         }
     }
 }

@@ -10,6 +10,14 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <EntityType Name="TableAdminler">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="varchar" MaxLength="50" />
+    <Property Name="Sifre" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="TableHareketler">
     <Key>
       <PropertyRef Name="HareketID" />
@@ -182,6 +190,7 @@
   </Function>
   <EntityContainer Name="NetCafeSystemModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TableAdminler" EntityType="Self.TableAdminler" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TableHareketler" EntityType="Self.TableHareketler" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TableKullanicilar" EntityType="Self.TableKullanicilar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TableMasalar" EntityType="Self.TableMasalar" Schema="dbo" store:Type="Tables" />

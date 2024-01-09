@@ -16,5 +16,20 @@ namespace İnternetCafeSistemi
         {
             InitializeComponent();
         }
+
+        private void btnAdminGiris_Click(object sender, EventArgs e)
+        {
+            FormAdminGirisi adminGirisi = new FormAdminGirisi();
+            adminGirisi.Show();
+            this.Hide();
+
+        }
+
+        private void btnKullanıcıGiris_Click(object sender, EventArgs e)
+        {
+            FormKullaniciGirisi kullaniciGirisi = new FormKullaniciGirisi();
+            kullaniciGirisi.Show();
+            this.Hide();
+        }
     }
 }

@@ -24,7 +24,6 @@ C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\bin\Debug\EntityFra
 C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\obj\Debug\İnternetCafeSistemi.csproj.AssemblyReference.cache
 C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\obj\Debug\İnternetCafeSistemi.FormAdminPaneli.resources
-C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\obj\Debug\İnternetCafeSistemi.FormBaslangic.resources
 C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\obj\Debug\İnternetCafeSistemi.FormMasaAc.resources
 C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\obj\Debug\İnternetCafeSistemi.Properties.Resources.resources
 C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\obj\Debug\İnternetCafeSistemi.csproj.GenerateResource.cache
@@ -32,3 +31,9 @@ C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\obj\Debug\İnternet
 C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\obj\Debug\İnternetCafeSistemi.csproj.CopyComplete
 C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\obj\Debug\İnternetCafeSistemi.exe
 C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\obj\Debug\İnternetCafeSistemi.pdb
+C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\obj\Debug\İnternetCafeSistemi.FormMasaSilme.resources
+C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\obj\Debug\İnternetCafeSistemi.FormAdminGirisi.resources
+C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\obj\Debug\İnternetCafeSistemi.FormKullaniciGirisi.resources
+C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\obj\Debug\İnternetCafeSistemi.FormMasaBilgisi.resources
+C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\obj\Debug\İnternetCafeSistemi.FormBaslangic.resources
+C:\Users\Esadcngl\Desktop\NetCafeSystem\İnternetCafeSistemi\obj\Debug\İnternetCafeSistemi.FormKullaniciIstek.resources

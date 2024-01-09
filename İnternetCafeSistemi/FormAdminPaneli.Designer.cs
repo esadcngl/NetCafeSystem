@@ -37,7 +37,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panelMasaInfo = new System.Windows.Forms.Panel();
             this.panelMasaDoluInfo = new System.Windows.Forms.Panel();
-            this.panelSatislarİnfo = new System.Windows.Forms.Panel();
+            this.panelKullanicilarInfo = new System.Windows.Forms.Panel();
+            this.btnÜyeSil = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtKayitTarihi2 = new System.Windows.Forms.TextBox();
+            this.labelMail2 = new System.Windows.Forms.Label();
+            this.txtMail2 = new System.Windows.Forms.TextBox();
+            this.labelSifre2 = new System.Windows.Forms.Label();
+            this.txtSifre2 = new System.Windows.Forms.TextBox();
+            this.labelKadi2 = new System.Windows.Forms.Label();
+            this.txtKAdi2 = new System.Windows.Forms.TextBox();
             this.btnDoluMasaKapat = new System.Windows.Forms.Button();
             this.txtKullanilanSüre = new System.Windows.Forms.TextBox();
             this.labelKullanilanSüre = new System.Windows.Forms.Label();
@@ -64,22 +73,33 @@
             this.masaAdi = new System.Windows.Forms.Label();
             this.masaID = new System.Windows.Forms.Label();
             this.Tabs = new System.Windows.Forms.TabControl();
-            this.tabPageMenü = new System.Windows.Forms.TabPage();
+            this.tabPageMasalar = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tabPageUyeler = new System.Windows.Forms.TabPage();
+            this.groupÜyeEkleme = new System.Windows.Forms.GroupBox();
+            this.btnÜyeEkle = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtYeniMail = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtYeniSifre = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtYeniKullanici = new System.Windows.Forms.TextBox();
             this.dataGridViewKullanici = new System.Windows.Forms.DataGridView();
             this.tabPageSatislar = new System.Windows.Forms.TabPage();
             this.dataGridViewSatislar = new System.Windows.Forms.DataGridView();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnMasaOlustur = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnMasaSil = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelMasaInfo.SuspendLayout();
             this.panelMasaDoluInfo.SuspendLayout();
+            this.panelKullanicilarInfo.SuspendLayout();
             this.Tabs.SuspendLayout();
-            this.tabPageMenü.SuspendLayout();
+            this.tabPageMasalar.SuspendLayout();
             this.tabPageUyeler.SuspendLayout();
+            this.groupÜyeEkleme.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewKullanici)).BeginInit();
             this.tabPageSatislar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSatislar)).BeginInit();
@@ -102,9 +122,9 @@
             this.panel2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel2.Controls.Add(this.labelDate);
             this.panel2.Controls.Add(this.LabelClock);
-            this.panel2.Location = new System.Drawing.Point(602, 0);
+            this.panel2.Location = new System.Drawing.Point(621, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(199, 44);
+            this.panel2.Size = new System.Drawing.Size(180, 44);
             this.panel2.TabIndex = 2;
             // 
             // labelDate
@@ -169,7 +189,7 @@
             // 
             // panelMasaDoluInfo
             // 
-            this.panelMasaDoluInfo.Controls.Add(this.panelSatislarİnfo);
+            this.panelMasaDoluInfo.Controls.Add(this.panelKullanicilarInfo);
             this.panelMasaDoluInfo.Controls.Add(this.btnDoluMasaKapat);
             this.panelMasaDoluInfo.Controls.Add(this.txtKullanilanSüre);
             this.panelMasaDoluInfo.Controls.Add(this.labelKullanilanSüre);
@@ -189,13 +209,105 @@
             this.panelMasaDoluInfo.TabIndex = 14;
             this.panelMasaDoluInfo.Visible = false;
             // 
-            // panelSatislarİnfo
+            // panelKullanicilarInfo
             // 
-            this.panelSatislarİnfo.Location = new System.Drawing.Point(-1, 0);
-            this.panelSatislarİnfo.Name = "panelSatislarİnfo";
-            this.panelSatislarİnfo.Size = new System.Drawing.Size(208, 255);
-            this.panelSatislarİnfo.TabIndex = 15;
-            this.panelSatislarİnfo.Visible = false;
+            this.panelKullanicilarInfo.Controls.Add(this.btnÜyeSil);
+            this.panelKullanicilarInfo.Controls.Add(this.label5);
+            this.panelKullanicilarInfo.Controls.Add(this.txtKayitTarihi2);
+            this.panelKullanicilarInfo.Controls.Add(this.labelMail2);
+            this.panelKullanicilarInfo.Controls.Add(this.txtMail2);
+            this.panelKullanicilarInfo.Controls.Add(this.labelSifre2);
+            this.panelKullanicilarInfo.Controls.Add(this.txtSifre2);
+            this.panelKullanicilarInfo.Controls.Add(this.labelKadi2);
+            this.panelKullanicilarInfo.Controls.Add(this.txtKAdi2);
+            this.panelKullanicilarInfo.Location = new System.Drawing.Point(-1, 0);
+            this.panelKullanicilarInfo.Name = "panelKullanicilarInfo";
+            this.panelKullanicilarInfo.Size = new System.Drawing.Size(208, 255);
+            this.panelKullanicilarInfo.TabIndex = 15;
+            this.panelKullanicilarInfo.Visible = false;
+            // 
+            // btnÜyeSil
+            // 
+            this.btnÜyeSil.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnÜyeSil.Location = new System.Drawing.Point(60, 169);
+            this.btnÜyeSil.Name = "btnÜyeSil";
+            this.btnÜyeSil.Size = new System.Drawing.Size(75, 36);
+            this.btnÜyeSil.TabIndex = 8;
+            this.btnÜyeSil.Text = "ÜYEYİ SİL";
+            this.btnÜyeSil.UseVisualStyleBackColor = true;
+            this.btnÜyeSil.Click += new System.EventHandler(this.btnÜyeSil_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label5.Location = new System.Drawing.Point(7, 128);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(84, 17);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Kayıt Tarihi: ";
+            // 
+            // txtKayitTarihi2
+            // 
+            this.txtKayitTarihi2.Location = new System.Drawing.Point(90, 127);
+            this.txtKayitTarihi2.Name = "txtKayitTarihi2";
+            this.txtKayitTarihi2.ReadOnly = true;
+            this.txtKayitTarihi2.Size = new System.Drawing.Size(110, 20);
+            this.txtKayitTarihi2.TabIndex = 6;
+            // 
+            // labelMail2
+            // 
+            this.labelMail2.AutoSize = true;
+            this.labelMail2.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.labelMail2.Location = new System.Drawing.Point(53, 97);
+            this.labelMail2.Name = "labelMail2";
+            this.labelMail2.Size = new System.Drawing.Size(38, 17);
+            this.labelMail2.TabIndex = 5;
+            this.labelMail2.Text = "Mail:";
+            // 
+            // txtMail2
+            // 
+            this.txtMail2.Location = new System.Drawing.Point(90, 96);
+            this.txtMail2.Name = "txtMail2";
+            this.txtMail2.ReadOnly = true;
+            this.txtMail2.Size = new System.Drawing.Size(110, 20);
+            this.txtMail2.TabIndex = 4;
+            // 
+            // labelSifre2
+            // 
+            this.labelSifre2.AutoSize = true;
+            this.labelSifre2.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.labelSifre2.Location = new System.Drawing.Point(50, 64);
+            this.labelSifre2.Name = "labelSifre2";
+            this.labelSifre2.Size = new System.Drawing.Size(41, 17);
+            this.labelSifre2.TabIndex = 3;
+            this.labelSifre2.Text = "Sifre:";
+            // 
+            // txtSifre2
+            // 
+            this.txtSifre2.Location = new System.Drawing.Point(90, 63);
+            this.txtSifre2.Name = "txtSifre2";
+            this.txtSifre2.ReadOnly = true;
+            this.txtSifre2.Size = new System.Drawing.Size(110, 20);
+            this.txtSifre2.TabIndex = 2;
+            // 
+            // labelKadi2
+            // 
+            this.labelKadi2.AutoSize = true;
+            this.labelKadi2.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.labelKadi2.Location = new System.Drawing.Point(5, 33);
+            this.labelKadi2.Name = "labelKadi2";
+            this.labelKadi2.Size = new System.Drawing.Size(86, 17);
+            this.labelKadi2.TabIndex = 1;
+            this.labelKadi2.Text = "Kullanıcı Adı:";
+            // 
+            // txtKAdi2
+            // 
+            this.txtKAdi2.Location = new System.Drawing.Point(90, 32);
+            this.txtKAdi2.Name = "txtKAdi2";
+            this.txtKAdi2.ReadOnly = true;
+            this.txtKAdi2.Size = new System.Drawing.Size(110, 20);
+            this.txtKAdi2.TabIndex = 0;
             // 
             // btnDoluMasaKapat
             // 
@@ -439,7 +551,7 @@
             // Tabs
             // 
             this.Tabs.AccessibleName = "";
-            this.Tabs.Controls.Add(this.tabPageMenü);
+            this.Tabs.Controls.Add(this.tabPageMasalar);
             this.Tabs.Controls.Add(this.tabPageUyeler);
             this.Tabs.Controls.Add(this.tabPageSatislar);
             this.Tabs.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -449,19 +561,20 @@
             this.Tabs.Size = new System.Drawing.Size(599, 258);
             this.Tabs.TabIndex = 2;
             this.Tabs.Tag = "";
+            this.Tabs.SelectedIndexChanged += new System.EventHandler(this.Tabs_SelectedIndexChanged);
             this.Tabs.Click += new System.EventHandler(this.Tabs_Click);
             // 
-            // tabPageMenü
+            // tabPageMasalar
             // 
-            this.tabPageMenü.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPageMenü.Controls.Add(this.flowLayoutPanel1);
-            this.tabPageMenü.Location = new System.Drawing.Point(4, 24);
-            this.tabPageMenü.Name = "tabPageMenü";
-            this.tabPageMenü.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMenü.Size = new System.Drawing.Size(591, 230);
-            this.tabPageMenü.TabIndex = 0;
-            this.tabPageMenü.Tag = "";
-            this.tabPageMenü.Text = "MASALAR";
+            this.tabPageMasalar.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageMasalar.Controls.Add(this.flowLayoutPanel1);
+            this.tabPageMasalar.Location = new System.Drawing.Point(4, 24);
+            this.tabPageMasalar.Name = "tabPageMasalar";
+            this.tabPageMasalar.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMasalar.Size = new System.Drawing.Size(591, 230);
+            this.tabPageMasalar.TabIndex = 0;
+            this.tabPageMasalar.Tag = "";
+            this.tabPageMasalar.Text = "MASALAR";
             // 
             // flowLayoutPanel1
             // 
@@ -474,6 +587,7 @@
             // tabPageUyeler
             // 
             this.tabPageUyeler.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageUyeler.Controls.Add(this.groupÜyeEkleme);
             this.tabPageUyeler.Controls.Add(this.dataGridViewKullanici);
             this.tabPageUyeler.Location = new System.Drawing.Point(4, 24);
             this.tabPageUyeler.Name = "tabPageUyeler";
@@ -482,6 +596,84 @@
             this.tabPageUyeler.TabIndex = 1;
             this.tabPageUyeler.Text = "ÜYELER";
             // 
+            // groupÜyeEkleme
+            // 
+            this.groupÜyeEkleme.Controls.Add(this.btnÜyeEkle);
+            this.groupÜyeEkleme.Controls.Add(this.label4);
+            this.groupÜyeEkleme.Controls.Add(this.txtYeniMail);
+            this.groupÜyeEkleme.Controls.Add(this.label6);
+            this.groupÜyeEkleme.Controls.Add(this.txtYeniSifre);
+            this.groupÜyeEkleme.Controls.Add(this.label7);
+            this.groupÜyeEkleme.Controls.Add(this.txtYeniKullanici);
+            this.groupÜyeEkleme.Location = new System.Drawing.Point(364, 14);
+            this.groupÜyeEkleme.Name = "groupÜyeEkleme";
+            this.groupÜyeEkleme.Size = new System.Drawing.Size(200, 195);
+            this.groupÜyeEkleme.TabIndex = 1;
+            this.groupÜyeEkleme.TabStop = false;
+            this.groupÜyeEkleme.Text = "Üye Ekleme";
+            // 
+            // btnÜyeEkle
+            // 
+            this.btnÜyeEkle.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnÜyeEkle.Location = new System.Drawing.Point(65, 132);
+            this.btnÜyeEkle.Name = "btnÜyeEkle";
+            this.btnÜyeEkle.Size = new System.Drawing.Size(75, 36);
+            this.btnÜyeEkle.TabIndex = 16;
+            this.btnÜyeEkle.Text = "ÜYE EKLE";
+            this.btnÜyeEkle.UseVisualStyleBackColor = true;
+            this.btnÜyeEkle.Click += new System.EventHandler(this.btnÜyeEkle_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label4.Location = new System.Drawing.Point(62, 97);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 17);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Mail:";
+            // 
+            // txtYeniMail
+            // 
+            this.txtYeniMail.Location = new System.Drawing.Point(102, 96);
+            this.txtYeniMail.Name = "txtYeniMail";
+            this.txtYeniMail.Size = new System.Drawing.Size(82, 21);
+            this.txtYeniMail.TabIndex = 12;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label6.Location = new System.Drawing.Point(59, 64);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(41, 17);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Sifre:";
+            // 
+            // txtYeniSifre
+            // 
+            this.txtYeniSifre.Location = new System.Drawing.Point(102, 63);
+            this.txtYeniSifre.Name = "txtYeniSifre";
+            this.txtYeniSifre.Size = new System.Drawing.Size(82, 21);
+            this.txtYeniSifre.TabIndex = 10;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label7.Location = new System.Drawing.Point(14, 33);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(86, 17);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Kullanıcı Adı:";
+            // 
+            // txtYeniKullanici
+            // 
+            this.txtYeniKullanici.Location = new System.Drawing.Point(102, 32);
+            this.txtYeniKullanici.Name = "txtYeniKullanici";
+            this.txtYeniKullanici.Size = new System.Drawing.Size(82, 21);
+            this.txtYeniKullanici.TabIndex = 8;
+            // 
             // dataGridViewKullanici
             // 
             this.dataGridViewKullanici.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -489,6 +681,7 @@
             this.dataGridViewKullanici.Name = "dataGridViewKullanici";
             this.dataGridViewKullanici.Size = new System.Drawing.Size(341, 230);
             this.dataGridViewKullanici.TabIndex = 0;
+            this.dataGridViewKullanici.SelectionChanged += new System.EventHandler(this.dataGridViewKullanici_SelectionChanged);
             // 
             // tabPageSatislar
             // 
@@ -505,7 +698,7 @@
             this.dataGridViewSatislar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSatislar.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewSatislar.Name = "dataGridViewSatislar";
-            this.dataGridViewSatislar.Size = new System.Drawing.Size(578, 230);
+            this.dataGridViewSatislar.Size = new System.Drawing.Size(590, 230);
             this.dataGridViewSatislar.TabIndex = 0;
             // 
             // dataGridView1
@@ -519,9 +712,10 @@
             // 
             // btnMasaOlustur
             // 
-            this.btnMasaOlustur.Location = new System.Drawing.Point(51, 391);
+            this.btnMasaOlustur.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnMasaOlustur.Location = new System.Drawing.Point(55, 335);
             this.btnMasaOlustur.Name = "btnMasaOlustur";
-            this.btnMasaOlustur.Size = new System.Drawing.Size(101, 47);
+            this.btnMasaOlustur.Size = new System.Drawing.Size(91, 36);
             this.btnMasaOlustur.TabIndex = 4;
             this.btnMasaOlustur.Text = "Masa Ekle";
             this.btnMasaOlustur.UseVisualStyleBackColor = true;
@@ -533,11 +727,23 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btnMasaSil
+            // 
+            this.btnMasaSil.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnMasaSil.Location = new System.Drawing.Point(55, 386);
+            this.btnMasaSil.Name = "btnMasaSil";
+            this.btnMasaSil.Size = new System.Drawing.Size(91, 36);
+            this.btnMasaSil.TabIndex = 5;
+            this.btnMasaSil.Text = "Masa Sil";
+            this.btnMasaSil.UseVisualStyleBackColor = true;
+            this.btnMasaSil.Click += new System.EventHandler(this.btnMasaSil_Click);
+            // 
             // FormAdminPaneli
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnMasaSil);
             this.Controls.Add(this.panelMasaInfo);
             this.Controls.Add(this.btnMasaOlustur);
             this.Controls.Add(this.dataGridView1);
@@ -554,9 +760,13 @@
             this.panelMasaInfo.PerformLayout();
             this.panelMasaDoluInfo.ResumeLayout(false);
             this.panelMasaDoluInfo.PerformLayout();
+            this.panelKullanicilarInfo.ResumeLayout(false);
+            this.panelKullanicilarInfo.PerformLayout();
             this.Tabs.ResumeLayout(false);
-            this.tabPageMenü.ResumeLayout(false);
+            this.tabPageMasalar.ResumeLayout(false);
             this.tabPageUyeler.ResumeLayout(false);
+            this.groupÜyeEkleme.ResumeLayout(false);
+            this.groupÜyeEkleme.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewKullanici)).EndInit();
             this.tabPageSatislar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSatislar)).EndInit();
@@ -576,7 +786,7 @@
         private System.Windows.Forms.Label masaID;
         private System.Windows.Forms.TabControl Tabs;
         private System.Windows.Forms.TabPage tabPageUyeler;
-        private System.Windows.Forms.TabPage tabPageMenü;
+        private System.Windows.Forms.TabPage tabPageMasalar;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnMasaOlustur;
@@ -610,6 +820,24 @@
         private System.Windows.Forms.Button btnDoluMasaKapat;
         private System.Windows.Forms.TabPage tabPageSatislar;
         private System.Windows.Forms.DataGridView dataGridViewSatislar;
-        private System.Windows.Forms.Panel panelSatislarİnfo;
+        private System.Windows.Forms.Panel panelKullanicilarInfo;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtKayitTarihi2;
+        private System.Windows.Forms.Label labelMail2;
+        private System.Windows.Forms.TextBox txtMail2;
+        private System.Windows.Forms.Label labelSifre2;
+        private System.Windows.Forms.TextBox txtSifre2;
+        private System.Windows.Forms.Label labelKadi2;
+        private System.Windows.Forms.TextBox txtKAdi2;
+        private System.Windows.Forms.Button btnÜyeSil;
+        private System.Windows.Forms.GroupBox groupÜyeEkleme;
+        private System.Windows.Forms.Button btnÜyeEkle;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtYeniMail;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtYeniSifre;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtYeniKullanici;
+        private System.Windows.Forms.Button btnMasaSil;
     }
 }

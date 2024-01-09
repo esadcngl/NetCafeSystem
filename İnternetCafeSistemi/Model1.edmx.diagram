@@ -18,6 +18,7 @@
         <AssociationConnector Association="NetCafeSystemModel.FK_TableOturumlar_TableKullanicilar" ManuallyRouted="false" />
         <AssociationConnector Association="NetCafeSystemModel.FK_TableOturumlar_TableMasalar" ManuallyRouted="false" />
         <EntityTypeShape EntityType="NetCafeSystemModel.TableSatis" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NetCafeSystemModel.TableAdminler" Width="1.5" PointX="8" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
