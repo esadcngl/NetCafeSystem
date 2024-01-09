@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -157,11 +158,14 @@ namespace İnternetCafeSistemi
 
         }
 
-
-
+        
+        
         private void Tabs_Click(object sender, EventArgs e)
         {
             panelMasaInfo.Visible = false;
+            dataGridViewSatisDoldur();
+            
+               
         }
 
         private void dataGridViewKullaniciDoldur()
@@ -192,93 +196,128 @@ namespace İnternetCafeSistemi
             dataGridView1.DataSource = query.ToList();
 
         }
+        private void dataGridViewSatisDoldur()
+        {
+            var satisListesi = from satis in netCafeDB.TableSatis
+                               join kullanici in netCafeDB.TableKullanicilar
+                               on satis.KullaniciID equals kullanici.KullaniciID
+                               join masa in netCafeDB.TableMasalar
+                               on satis.MasaID equals masa.MasaID
+                               select new
+                               {
+                                   SatısID = satis.SatısID,
+                                   KullaniciAdi = kullanici.KullaniciAdi,
+                                   MasaAdi = masa.MasaAdi,
+                                   BaslangicZamani = satis.BaslangicZamani,
+                                   BitisZamani = satis.BitisZamani,
+                                   AcilisTuru = satis.AcilisTuru,
+                                   KullanilanSure = satis.KullanilanSüre,
+                                   Ucret = satis.Ucret
+                               };
+            dataGridViewSatislar.DataSource = satisListesi.ToList();
+        }
 
         private void btnMasaAc_Click(object sender, EventArgs e)
         {
             int masaID = Convert.ToInt32(txtMasaID.Text);
             TableMasalar masa = netCafeDB.TableMasalar.FirstOrDefault(m => m.MasaID == masaID);
-           
+
             if (masa.Durumu == "BOŞ")
             {
-                masa.Durumu = "DOLU";
-                masalar[masaID - 1].BackColor = Color.Red;
 
-                TableOturumlar oturum = new TableOturumlar();
-                oturum.MasaID = masaID;
-                oturum.BaslangicZamani = DateTime.Now;
-                if (radioSecilen.Text == "Süreli")
+                if (radioSecilen != null)
                 {
-                    oturum.AcilisTuru = comboSüreli.Text;
+                    TableOturumlar oturum = new TableOturumlar();
+                    if (radioSecilen.Text == "Süreli")
+                    {
+                        oturum.AcilisTuru = comboSüreli.Text;
+                    }
+                    else if (radioSecilen.Text == "Süresiz")
+                    {
+                        oturum.AcilisTuru = "Süresiz";
+                    }
+                    masa.Durumu = "DOLU";
+                    masalar[masaID - 1].BackColor = Color.Red;
+
+                    oturum.MasaID = masaID;
+                    oturum.BaslangicZamani = DateTime.Now;
+                    oturum.KullaniciID = 1;
+                    netCafeDB.TableOturumlar.Add(oturum);
+                    netCafeDB.SaveChanges();
+                    TableHareketler Hareket = new TableHareketler();
+                    Hareket.MasaID = masaID;
+                    Hareket.IslemTuru = "MASA AÇMA";
+                    Hareket.IslemZamani = DateTime.Now;
+                    Hareket.KullaniciID = 1;
+                    netCafeDB.TableHareketler.Add(Hareket);
+                    netCafeDB.SaveChanges();
+                    panelMasaInfo.Visible = false;
+                    panelMasaDoluInfo.Visible = false;
+                    int MasaID = masa.MasaID;
+                    TableOturumlar oturum1 = netCafeDB.TableOturumlar.FirstOrDefault(o => o.MasaID == MasaID);
+                    string kullaniciAdi = netCafeDB.TableKullanicilar
+                              .Where(k => k.KullaniciID == oturum1.KullaniciID)
+                              .Select(k => k.KullaniciAdi)
+                              .FirstOrDefault();
+                    txtMasaDoluID.Text = masa.MasaID.ToString();
+                    txtDoluMasaAdı.Text = masa.MasaAdi;
+                    txtDoluMasaDurumu.Text = masa.Durumu;
+                    txtDoluKAdi.Text = kullaniciAdi;
+                    txtBaslangicZamani.Text = oturum1.BaslangicZamani.ToString();
+                    txtKullanilanSüre.Text = oturum1.KullanilanSure.ToString();
+                    txtKullanilanSüre.Text = "0";
+                    radioSüresiz.Visible = false;
+                    radioSüreli.Visible = false;
+                    btnMasaAc.Visible = false;
+                    comboSüreli.Visible = false;
+                    dataGridViewLogDoldur();
+                    MessageBox.Show(masa.MasaAdi + " Açıldı. ");
                 }
-                else if (radioSecilen.Text == "Süresiz")
+                else
                 {
-                    oturum.AcilisTuru = "Süresiz";
+                    MessageBox.Show("Butonlardan birini seçiniz!");
                 }
-                oturum.KullaniciID = 1;
-                netCafeDB.TableOturumlar.Add(oturum);
-                netCafeDB.SaveChanges();
-                TableHareketler Hareket = new TableHareketler();
-                Hareket.MasaID = masaID;
-                Hareket.IslemTuru = "MASA AÇMA";
-                Hareket.IslemZamani = DateTime.Now;
-                Hareket.KullaniciID = 1;
-                netCafeDB.TableHareketler.Add(Hareket);
-                netCafeDB.SaveChanges();
-                panelMasaInfo.Visible = false;
-                panelMasaDoluInfo.Visible = false;
-                int MasaID = masa.MasaID;
-                TableOturumlar oturum1 = netCafeDB.TableOturumlar.FirstOrDefault(o => o.MasaID == MasaID);
-                string kullaniciAdi = netCafeDB.TableKullanicilar
-                          .Where(k => k.KullaniciID == oturum1.KullaniciID)
-                          .Select(k => k.KullaniciAdi)
-                          .FirstOrDefault();
-                txtMasaDoluID.Text = masa.MasaID.ToString();
-                txtDoluMasaAdı.Text = masa.MasaAdi;
-                txtDoluMasaDurumu.Text = masa.Durumu;
-                txtDoluKAdi.Text = kullaniciAdi;
-                txtBaslangicZamani.Text = oturum1.BaslangicZamani.ToString();
-                txtKullanilanSüre.Text = oturum1.KullanilanSure.ToString();
-                txtKullanilanSüre.Text = "0";
-                radioSüresiz.Visible = false;
-                radioSüreli.Visible = false;
-                btnMasaAc.Visible = false;
-                comboSüreli.Visible = false;
+
+
 
             }
             else if (masa.Durumu == "İSTEK")
             {
-                masa.Durumu = "DOLU";
-                masalar[masaID - 1].BackColor = Color.Red;
-
-                TableOturumlar oturum = new TableOturumlar();
-                oturum.MasaID = masaID;
-                oturum.BaslangicZamani = DateTime.Now;
-                if (radioSecilen.Text == "Süreli")
+                if (radioSecilen != null)
                 {
-                    oturum.AcilisTuru = comboSüreli.Text;
+                    masa.Durumu = "DOLU";
+                    masalar[masaID - 1].BackColor = Color.Red;
+
+                    TableOturumlar oturum = new TableOturumlar();
+                    oturum.MasaID = masaID;
+                    oturum.BaslangicZamani = DateTime.Now;
+                    if (radioSecilen.Text == "Süreli")
+                    {
+                        oturum.AcilisTuru = comboSüreli.Text;
+                    }
+                    else if (radioSecilen.Text == "Süresiz")
+                    {
+                        oturum.AcilisTuru = "Süresiz";
+                    }
+                    oturum.KullaniciID = masa.KullaniciID;
+                    netCafeDB.TableOturumlar.Add(oturum);
+                    netCafeDB.SaveChanges();
+                    TableHareketler Hareket = new TableHareketler();
+                    Hareket.MasaID = masaID;
+                    Hareket.IslemTuru = "MASA AÇMA";
+                    Hareket.IslemZamani = DateTime.Now;
+                    Hareket.KullaniciID = masa.KullaniciID;
+                    netCafeDB.TableHareketler.Add(Hareket);
+                    netCafeDB.SaveChanges();
+                    dataGridViewLogDoldur();
+                    MessageBox.Show(masa.MasaAdi + " Açıldı. ");
                 }
-                else if (radioSecilen.Text == "Süresiz")
+                else
                 {
-                    oturum.AcilisTuru = "Süresiz";
+                    MessageBox.Show("Butonlardan birinini seçiniz!");
+
                 }
-                oturum.KullaniciID = masa.KullaniciID;
-                netCafeDB.TableOturumlar.Add(oturum);
-                netCafeDB.SaveChanges();
-                TableHareketler Hareket = new TableHareketler();
-                Hareket.MasaID = masaID;
-                Hareket.IslemTuru = "MASA AÇMA";
-                Hareket.IslemZamani = DateTime.Now;
-                Hareket.KullaniciID = masa.KullaniciID;
-                netCafeDB.TableHareketler.Add(Hareket);
-                netCafeDB.SaveChanges();
-
-
             }
-
-            dataGridViewLogDoldur();
-            MessageBox.Show(masa.MasaAdi + " Açıldı. ");
-
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -301,19 +340,19 @@ namespace İnternetCafeSistemi
         }
         private void TimerMasalar_Tick(object sender, EventArgs e)
         {
-           
+
             foreach (var masaButonu in masalar)
             {
                 string masaAdi = masaButonu.Text;
                 TableMasalar masa = netCafeDB.TableMasalar.FirstOrDefault(m => m.MasaAdi == masaAdi);
+                TableOturumlar oturum = netCafeDB.TableOturumlar.FirstOrDefault(o => o.MasaID == masa.MasaID);
 
                 if (masa != null)
                 {
                     // Masa durumu kontrolü ve güncelleme işlemleri burada yapılır
-                    if (masa.Durumu == "DOLU" )
+                    if (masa.Durumu == "DOLU")
                     {
                         // Masa doluysa, süre güncelleme işlemleri burada yapılır
-                        TableOturumlar oturum = netCafeDB.TableOturumlar.FirstOrDefault(o => o.MasaID == masa.MasaID);
                         if (oturum != null)
                         {
                             DateTime baslangic = (DateTime)oturum.BaslangicZamani;
@@ -323,7 +362,7 @@ namespace İnternetCafeSistemi
                             oturum.KullanilanSure = yeniKullanilanSure;
                             netCafeDB.SaveChanges();
                             double baslangicUcreti = 5.0;
-
+                            
                             // Her 12 dakikada 2 TL artış
                             double dakikaBasiUcretArtisi = 2.0;
                             double ekUcret = Math.Ceiling(gecenSüre.TotalMinutes / 12.0) * dakikaBasiUcretArtisi;
@@ -333,12 +372,95 @@ namespace İnternetCafeSistemi
                             oturum.Ucret = Convert.ToDecimal(toplamUcret);
 
                             netCafeDB.SaveChanges();
+                            if (oturum.AcilisTuru == "15" && oturum.KullanilanSure >= 15)
+                                OturumBitir(masa.MasaID, oturum);
+                            else if (oturum.AcilisTuru == "30" && oturum.KullanilanSure >= 30)
+                                OturumBitir(masa.MasaID, oturum);
+                            else if (oturum.AcilisTuru == "45" && oturum.KullanilanSure >= 45)
+                                OturumBitir(masa.MasaID, oturum);
+                            else if (oturum.AcilisTuru == "60" && oturum.KullanilanSure >= 60)
+                                OturumBitir(masa.MasaID, oturum);
+                            else if (oturum.AcilisTuru == "120" && oturum.KullanilanSure >= 120)
+                                OturumBitir(masa.MasaID, oturum);
+                            else if (oturum.AcilisTuru == "180" && oturum.KullanilanSure >= 180)
+                                OturumBitir(masa.MasaID, oturum);
                         }
                     }
                 }
             }
         }
+        private void OturumBitir(int masaID, TableOturumlar oturum)
+        {
+            oturum.BitisZamanı = DateTime.Now;
 
+            // Oturumun süresini hesapla
+            DateTime baslangicZamani = (DateTime)oturum.BaslangicZamani;
+            TimeSpan gecenSure =(TimeSpan)(oturum.BitisZamanı - baslangicZamani);
+
+            // Kullanılan süreyi ve ücreti güncelle
+            int kullanilanSure = (int)gecenSure.TotalMinutes;
+            double baslangicUcreti = 5.0;
+            double dakikaBasiUcretArtisi = 2.0;
+            double ekUcret = Math.Ceiling(gecenSure.TotalMinutes / 12.0) * dakikaBasiUcretArtisi;
+            double toplamUcret = baslangicUcreti + ekUcret;
+
+            oturum.KullanilanSure = kullanilanSure;
+            oturum.Ucret = Convert.ToDecimal(toplamUcret);
+
+            // Diğer işlemleri buraya ekleyebilirsiniz
+            // Örneğin: Satış kaydı oluştur, masanın durumunu güncelle, log ekle, vb.
+
+            // Masanın durumunu güncelle
+            TableMasalar masa = netCafeDB.TableMasalar.FirstOrDefault(m => m.MasaID == masaID);
+            if (masa != null)
+            {
+                masa.Durumu = "BOŞ";
+                masa.KullaniciID = null;
+            }
+
+            // Satış kaydı oluştur
+            TableSatis yeniSatis = new TableSatis
+            {
+                KullaniciID = oturum.KullaniciID,
+                MasaID = masaID,
+                BaslangicZamani = oturum.BaslangicZamani,
+                BitisZamani = oturum.BitisZamanı,
+                AcilisTuru = oturum.AcilisTuru,
+                KullanilanSüre = oturum.KullanilanSure,
+                Ucret = oturum.Ucret
+            };
+            netCafeDB.TableSatis.Add(yeniSatis);
+
+            // Hareket kaydı oluştur
+            TableHareketler hareket = new TableHareketler
+            {
+                KullaniciID = oturum.KullaniciID,
+                MasaID = masaID,
+                IslemTuru = "MASA KAPATMA",
+                IslemZamani = DateTime.Now
+            };
+            netCafeDB.TableHareketler.Add(hareket);
+            dataGridViewLogDoldur();
+            // Oturumu kapat
+            oturum.KullaniciID = null;
+            oturum.MasaID = null;
+            oturum.BaslangicZamani = null;
+            oturum.BitisZamanı = null;
+            oturum.AcilisTuru = null;
+            oturum.KullanilanSure = null;
+            oturum.Ucret = null;
+
+            // Değişiklikleri kaydet
+            netCafeDB.SaveChanges();
+
+            // Masanın arayüzünü güncelle
+            masalar[masaID - 1].BackColor = Color.LightGreen;
+            panelMasaDoluInfo.Visible = false;
+            panelMasaInfo.Visible= false;
+            MessageBox.Show(masa.MasaAdi+"' süresi Doldu , Oturum başarıyla sonlandırıldı.");
+
+            // Veritabanındaki diğer tabloyu güncelleme, loglama, bildirim gönderme gibi işlemleri bu metoda ekleyebilirsiniz.
+        }
         private void btnDoluMasaKapat_Click(object sender, EventArgs e)
         {
             int masaID = Convert.ToInt32(txtMasaDoluID.Text);
@@ -382,12 +504,12 @@ namespace İnternetCafeSistemi
                 {
                     masa.Durumu = "BOŞ";
                     masa.KullaniciID = null;
-                masalar[masaID - 1].BackColor = Color.LightGreen;
+                    masalar[masaID - 1].BackColor = Color.LightGreen;
                     panelMasaDoluInfo.Visible = false;
                     panelMasaInfo.Visible = false;
                 }
                 netCafeDB.SaveChanges();
-                MessageBox.Show(masa.MasaAdi  + " Başarılı bir şekilde kapatıldı.");
+                MessageBox.Show(masa.MasaAdi + " Başarılı bir şekilde kapatıldı.");
             }
             dataGridViewLogDoldur();
         }

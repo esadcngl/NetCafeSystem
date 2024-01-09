@@ -37,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panelMasaInfo = new System.Windows.Forms.Panel();
             this.panelMasaDoluInfo = new System.Windows.Forms.Panel();
+            this.panelSatislarİnfo = new System.Windows.Forms.Panel();
             this.btnDoluMasaKapat = new System.Windows.Forms.Button();
             this.txtKullanilanSüre = new System.Windows.Forms.TextBox();
             this.labelKullanilanSüre = new System.Windows.Forms.Label();
@@ -65,8 +66,10 @@
             this.Tabs = new System.Windows.Forms.TabControl();
             this.tabPageMenü = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPageUyeler = new System.Windows.Forms.TabPage();
             this.dataGridViewKullanici = new System.Windows.Forms.DataGridView();
+            this.tabPageSatislar = new System.Windows.Forms.TabPage();
+            this.dataGridViewSatislar = new System.Windows.Forms.DataGridView();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnMasaOlustur = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -76,8 +79,10 @@
             this.panelMasaDoluInfo.SuspendLayout();
             this.Tabs.SuspendLayout();
             this.tabPageMenü.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabPageUyeler.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewKullanici)).BeginInit();
+            this.tabPageSatislar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSatislar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -164,6 +169,7 @@
             // 
             // panelMasaDoluInfo
             // 
+            this.panelMasaDoluInfo.Controls.Add(this.panelSatislarİnfo);
             this.panelMasaDoluInfo.Controls.Add(this.btnDoluMasaKapat);
             this.panelMasaDoluInfo.Controls.Add(this.txtKullanilanSüre);
             this.panelMasaDoluInfo.Controls.Add(this.labelKullanilanSüre);
@@ -182,6 +188,14 @@
             this.panelMasaDoluInfo.Size = new System.Drawing.Size(207, 255);
             this.panelMasaDoluInfo.TabIndex = 14;
             this.panelMasaDoluInfo.Visible = false;
+            // 
+            // panelSatislarİnfo
+            // 
+            this.panelSatislarİnfo.Location = new System.Drawing.Point(-1, 0);
+            this.panelSatislarİnfo.Name = "panelSatislarİnfo";
+            this.panelSatislarİnfo.Size = new System.Drawing.Size(208, 255);
+            this.panelSatislarİnfo.TabIndex = 15;
+            this.panelSatislarİnfo.Visible = false;
             // 
             // btnDoluMasaKapat
             // 
@@ -332,12 +346,10 @@
             // radioSüreli
             // 
             this.radioSüreli.AutoSize = true;
-            this.radioSüreli.Checked = true;
             this.radioSüreli.Location = new System.Drawing.Point(45, 171);
             this.radioSüreli.Name = "radioSüreli";
             this.radioSüreli.Size = new System.Drawing.Size(51, 17);
             this.radioSüreli.TabIndex = 11;
-            this.radioSüreli.TabStop = true;
             this.radioSüreli.Text = "Süreli";
             this.radioSüreli.UseVisualStyleBackColor = true;
             this.radioSüreli.CheckedChanged += new System.EventHandler(this.SecileneGöre);
@@ -428,7 +440,8 @@
             // 
             this.Tabs.AccessibleName = "";
             this.Tabs.Controls.Add(this.tabPageMenü);
-            this.Tabs.Controls.Add(this.tabPage2);
+            this.Tabs.Controls.Add(this.tabPageUyeler);
+            this.Tabs.Controls.Add(this.tabPageSatislar);
             this.Tabs.Font = new System.Drawing.Font("Oceanwide Primer Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.Tabs.Location = new System.Drawing.Point(206, 44);
             this.Tabs.Name = "Tabs";
@@ -458,16 +471,16 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(585, 223);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
-            // tabPage2
+            // tabPageUyeler
             // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage2.Controls.Add(this.dataGridViewKullanici);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(591, 230);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "ÜYELER";
+            this.tabPageUyeler.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageUyeler.Controls.Add(this.dataGridViewKullanici);
+            this.tabPageUyeler.Location = new System.Drawing.Point(4, 24);
+            this.tabPageUyeler.Name = "tabPageUyeler";
+            this.tabPageUyeler.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageUyeler.Size = new System.Drawing.Size(591, 230);
+            this.tabPageUyeler.TabIndex = 1;
+            this.tabPageUyeler.Text = "ÜYELER";
             // 
             // dataGridViewKullanici
             // 
@@ -476,6 +489,24 @@
             this.dataGridViewKullanici.Name = "dataGridViewKullanici";
             this.dataGridViewKullanici.Size = new System.Drawing.Size(341, 230);
             this.dataGridViewKullanici.TabIndex = 0;
+            // 
+            // tabPageSatislar
+            // 
+            this.tabPageSatislar.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageSatislar.Controls.Add(this.dataGridViewSatislar);
+            this.tabPageSatislar.Location = new System.Drawing.Point(4, 24);
+            this.tabPageSatislar.Name = "tabPageSatislar";
+            this.tabPageSatislar.Size = new System.Drawing.Size(591, 230);
+            this.tabPageSatislar.TabIndex = 2;
+            this.tabPageSatislar.Text = "SATIŞLAR";
+            // 
+            // dataGridViewSatislar
+            // 
+            this.dataGridViewSatislar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSatislar.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewSatislar.Name = "dataGridViewSatislar";
+            this.dataGridViewSatislar.Size = new System.Drawing.Size(578, 230);
+            this.dataGridViewSatislar.TabIndex = 0;
             // 
             // dataGridView1
             // 
@@ -513,6 +544,7 @@
             this.Controls.Add(this.Tabs);
             this.Controls.Add(this.panel1);
             this.Name = "FormAdminPaneli";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormAdminPaneli";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -524,8 +556,10 @@
             this.panelMasaDoluInfo.PerformLayout();
             this.Tabs.ResumeLayout(false);
             this.tabPageMenü.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            this.tabPageUyeler.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewKullanici)).EndInit();
+            this.tabPageSatislar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSatislar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -541,7 +575,7 @@
         private System.Windows.Forms.Label masaAdi;
         private System.Windows.Forms.Label masaID;
         private System.Windows.Forms.TabControl Tabs;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPageUyeler;
         private System.Windows.Forms.TabPage tabPageMenü;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
@@ -574,5 +608,8 @@
         private System.Windows.Forms.TextBox txtKullanilanSüre;
         private System.Windows.Forms.Label labelKullanilanSüre;
         private System.Windows.Forms.Button btnDoluMasaKapat;
+        private System.Windows.Forms.TabPage tabPageSatislar;
+        private System.Windows.Forms.DataGridView dataGridViewSatislar;
+        private System.Windows.Forms.Panel panelSatislarİnfo;
     }
 }
