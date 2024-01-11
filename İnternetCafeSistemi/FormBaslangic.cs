@@ -31,5 +31,11 @@ namespace İnternetCafeSistemi
             kullaniciGirisi.Show();
             this.Hide();
         }
+
+        private void btnKapat_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+
+        }
     }
 }

@@ -11,9 +11,11 @@ namespace İnternetCafeSistemi
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class TableAdminler
     {
+        [Key]
         public int AdminID { get; set; }
         public string KullaniciAdi { get; set; }
         public string Sifre { get; set; }

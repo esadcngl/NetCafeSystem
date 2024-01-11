@@ -32,6 +32,8 @@ namespace İnternetCafeSistemi
             {
                 MessageBox.Show("Giriş başarılı!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 FormKullaniciIstek formKullaniciIstek = new FormKullaniciIstek();
+                formKullaniciIstek.kullaniciAdi = kullanici.KullaniciAdi;
+                formKullaniciIstek.kullaniciID = kullanici.KullaniciID;
                 formKullaniciIstek.Show();
                 this.Hide();
             }
@@ -39,6 +41,26 @@ namespace İnternetCafeSistemi
             {
                 MessageBox.Show("Kullanıcı adı veya şifre hatalı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnKapat_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnGeri_Click(object sender, EventArgs e)
+        {
+            FormBaslangic formBaslangic = new FormBaslangic();
+
+            formBaslangic.Show();
+            this.Close(); // Şuanki formu kapat
+        }
+
+        private void linklabelSifreUnuttum_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FormMail formMail = new FormMail();
+            formMail.Show();
+            this.Close();
         }
     }
 }

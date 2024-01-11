@@ -34,6 +34,8 @@
             this.txtKullaniciAdi = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.linklabelSifreUnuttum = new System.Windows.Forms.LinkLabel();
+            this.btnGeri = new System.Windows.Forms.Button();
+            this.btnKapat = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnGiris
@@ -94,19 +96,45 @@
             this.linklabelSifreUnuttum.TabIndex = 10;
             this.linklabelSifreUnuttum.TabStop = true;
             this.linklabelSifreUnuttum.Text = "şifremi unuttum";
-            this.linklabelSifreUnuttum.Visible = false;
+            this.linklabelSifreUnuttum.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklabelSifreUnuttum_LinkClicked);
+            // 
+            // btnGeri
+            // 
+            this.btnGeri.BackColor = System.Drawing.Color.Transparent;
+            this.btnGeri.BackgroundImage = global::İnternetCafeSistemi.Properties.Resources.arrow__1_;
+            this.btnGeri.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnGeri.Location = new System.Drawing.Point(221, 3);
+            this.btnGeri.Name = "btnGeri";
+            this.btnGeri.Size = new System.Drawing.Size(37, 31);
+            this.btnGeri.TabIndex = 12;
+            this.btnGeri.UseVisualStyleBackColor = false;
+            this.btnGeri.Click += new System.EventHandler(this.btnGeri_Click);
+            // 
+            // btnKapat
+            // 
+            this.btnKapat.BackgroundImage = global::İnternetCafeSistemi.Properties.Resources.close__3___1_;
+            this.btnKapat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnKapat.Location = new System.Drawing.Point(264, 3);
+            this.btnKapat.Name = "btnKapat";
+            this.btnKapat.Size = new System.Drawing.Size(37, 31);
+            this.btnKapat.TabIndex = 11;
+            this.btnKapat.UseVisualStyleBackColor = true;
+            this.btnKapat.Click += new System.EventHandler(this.btnKapat_Click);
             // 
             // FormKullaniciGirisi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(305, 264);
+            this.ClientSize = new System.Drawing.Size(305, 261);
+            this.Controls.Add(this.btnGeri);
+            this.Controls.Add(this.btnKapat);
             this.Controls.Add(this.linklabelSifreUnuttum);
             this.Controls.Add(this.btnGiris);
             this.Controls.Add(this.txtSifre);
             this.Controls.Add(this.labelSifre);
             this.Controls.Add(this.txtKullaniciAdi);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormKullaniciGirisi";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Kullanıcı Girişi";
@@ -123,5 +151,7 @@
         private System.Windows.Forms.TextBox txtKullaniciAdi;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel linklabelSifreUnuttum;
+        private System.Windows.Forms.Button btnGeri;
+        private System.Windows.Forms.Button btnKapat;
     }
 }

@@ -16,17 +16,23 @@ namespace İnternetCafeSistemi
         public FormAdminGirisi()
         {
             InitializeComponent();
+         
         }
 
         private void FormAdminGirisi_Load(object sender, EventArgs e)
         {
-
+           
+           
+            
+                
+            
         }
 
         private void btnGiris_Click(object sender, EventArgs e)
         {
             string kullaniciAdi = txtKullaniciAdi.Text.Trim();
             string sifre = txtSifre.Text.Trim();
+          
 
             // Kullanıcı adı ve şifreye göre admini bul
             TableAdminler admin = netCafeDB.TableAdminler.FirstOrDefault(a => a.KullaniciAdi == kullaniciAdi && a.Sifre == sifre);
@@ -44,6 +50,19 @@ namespace İnternetCafeSistemi
             {
                 MessageBox.Show("Kullanıcı adı veya şifre hatalı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnKapat_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnGeri_Click(object sender, EventArgs e)
+        {
+            FormBaslangic formBaslangic = new FormBaslangic();
+
+            formBaslangic.Show();
+            this.Close(); // Şuanki formu kapat
         }
     }
 }

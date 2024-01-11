@@ -24,7 +24,22 @@ namespace İnternetCafeSistemi
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+
+            modelBuilder.Entity<sysdiagrams>().HasKey(t => t.principal_id);
+            modelBuilder.Entity<TableHareketler>().HasKey(t => t.HareketID);
+            modelBuilder.Entity<TableKullanicilar>().HasKey(t => t.KullaniciID);
+            modelBuilder.Entity<TableMasalar>().HasKey(t => t.MasaID);
+            modelBuilder.Entity<TableOturumlar>().HasKey(t => t.OturumID);
+            modelBuilder.Entity<TableSatis>().HasKey(t => t.SatısID);
+            modelBuilder.Entity<TableAdminler>().HasKey(t => t.AdminID);
+            /*   modelBuilder.Entity<sysdiagrams>().Property(e => e.principal_id).IsRequired();
+               modelBuilder.Entity<TableHareketler>().Property(e => e.HareketID).IsRequired();
+               modelBuilder.Entity<TableKullanicilar>().Property(e => e.KullaniciID).IsRequired();
+               modelBuilder.Entity<TableMasalar>().Property(e => e.MasaID).IsRequired();
+               modelBuilder.Entity<TableOturumlar>().Property(e => e.OturumID).IsRequired();
+               modelBuilder.Entity<TableSatis>().Property(e => e.SatısID).IsRequired();
+               modelBuilder.Entity<TableAdminler>().Property(e => e.AdminID).IsRequired();*/
+            base.OnModelCreating(modelBuilder);
         }
     
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }

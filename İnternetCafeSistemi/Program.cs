@@ -16,7 +16,7 @@ namespace İnternetCafeSistemi
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormBaslangic());
+            Application.Run(new FormYuklenmeEkrani());
         }
     }
 }

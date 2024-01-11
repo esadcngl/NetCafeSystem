@@ -29,7 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAdminPaneli));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnGeri = new System.Windows.Forms.Button();
+            this.btnKapat = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.labelDate = new System.Windows.Forms.Label();
             this.LabelClock = new System.Windows.Forms.Label();
@@ -109,6 +112,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.Controls.Add(this.btnGeri);
+            this.panel1.Controls.Add(this.btnKapat);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
@@ -116,6 +121,29 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(803, 44);
             this.panel1.TabIndex = 0;
+            // 
+            // btnGeri
+            // 
+            this.btnGeri.BackColor = System.Drawing.Color.Transparent;
+            this.btnGeri.BackgroundImage = global::İnternetCafeSistemi.Properties.Resources.arrow__1_;
+            this.btnGeri.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnGeri.Location = new System.Drawing.Point(363, 8);
+            this.btnGeri.Name = "btnGeri";
+            this.btnGeri.Size = new System.Drawing.Size(37, 31);
+            this.btnGeri.TabIndex = 4;
+            this.btnGeri.UseVisualStyleBackColor = false;
+            this.btnGeri.Click += new System.EventHandler(this.btnGeri_Click);
+            // 
+            // btnKapat
+            // 
+            this.btnKapat.BackgroundImage = global::İnternetCafeSistemi.Properties.Resources.close__3___1_;
+            this.btnKapat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnKapat.Location = new System.Drawing.Point(406, 8);
+            this.btnKapat.Name = "btnKapat";
+            this.btnKapat.Size = new System.Drawing.Size(37, 31);
+            this.btnKapat.TabIndex = 3;
+            this.btnKapat.UseVisualStyleBackColor = true;
+            this.btnKapat.Click += new System.EventHandler(this.btnKapat_Click);
             // 
             // panel2
             // 
@@ -736,6 +764,7 @@
             this.btnMasaSil.TabIndex = 5;
             this.btnMasaSil.Text = "Masa Sil";
             this.btnMasaSil.UseVisualStyleBackColor = true;
+            this.btnMasaSil.Visible = false;
             this.btnMasaSil.Click += new System.EventHandler(this.btnMasaSil_Click);
             // 
             // FormAdminPaneli
@@ -749,6 +778,8 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.Tabs);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormAdminPaneli";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormAdminPaneli";
@@ -839,5 +870,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtYeniKullanici;
         private System.Windows.Forms.Button btnMasaSil;
+        private System.Windows.Forms.Button btnGeri;
+        private System.Windows.Forms.Button btnKapat;
     }
 }

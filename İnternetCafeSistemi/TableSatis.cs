@@ -11,9 +11,11 @@ namespace İnternetCafeSistemi
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class TableSatis
     {
+        [Key]
         public int SatısID { get; set; }
         public Nullable<int> KullaniciID { get; set; }
         public Nullable<int> MasaID { get; set; }

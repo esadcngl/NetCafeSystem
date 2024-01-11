@@ -30,6 +30,7 @@
         {
             this.btnKullanıcıGiris = new System.Windows.Forms.Button();
             this.btnAdminGiris = new System.Windows.Forms.Button();
+            this.btnKapat = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnKullanıcıGiris
@@ -58,14 +59,28 @@
             this.btnAdminGiris.UseVisualStyleBackColor = true;
             this.btnAdminGiris.Click += new System.EventHandler(this.btnAdminGiris_Click);
             // 
+            // btnKapat
+            // 
+            this.btnKapat.BackgroundImage = global::İnternetCafeSistemi.Properties.Resources.close__3___1_;
+            this.btnKapat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnKapat.Location = new System.Drawing.Point(444, 2);
+            this.btnKapat.Name = "btnKapat";
+            this.btnKapat.Size = new System.Drawing.Size(37, 31);
+            this.btnKapat.TabIndex = 4;
+            this.btnKapat.UseVisualStyleBackColor = true;
+            this.btnKapat.Click += new System.EventHandler(this.btnKapat_Click);
+            // 
             // FormBaslangic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 361);
+            this.Controls.Add(this.btnKapat);
             this.Controls.Add(this.btnKullanıcıGiris);
             this.Controls.Add(this.btnAdminGiris);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormBaslangic";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormBaslangic";
             this.ResumeLayout(false);
 
@@ -75,5 +90,6 @@
 
         private System.Windows.Forms.Button btnAdminGiris;
         private System.Windows.Forms.Button btnKullanıcıGiris;
+        private System.Windows.Forms.Button btnKapat;
     }
 }

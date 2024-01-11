@@ -11,7 +11,8 @@ namespace İnternetCafeSistemi
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class TableKullanicilar
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +23,7 @@ namespace İnternetCafeSistemi
             this.TableMasalar = new HashSet<TableMasalar>();
             this.TableOturumlar = new HashSet<TableOturumlar>();
         }
-    
+        [Key]
         public int KullaniciID { get; set; }
         public string KullaniciAdi { get; set; }
         public string Sifre { get; set; }

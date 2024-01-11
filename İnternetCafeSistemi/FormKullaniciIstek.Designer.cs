@@ -39,6 +39,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboMasalar = new System.Windows.Forms.ComboBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnGeri = new System.Windows.Forms.Button();
+            this.btnKapat = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnsüresiz
@@ -142,11 +144,36 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btnGeri
+            // 
+            this.btnGeri.BackColor = System.Drawing.Color.Transparent;
+            this.btnGeri.BackgroundImage = global::İnternetCafeSistemi.Properties.Resources.arrow__1_;
+            this.btnGeri.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnGeri.Location = new System.Drawing.Point(177, 1);
+            this.btnGeri.Name = "btnGeri";
+            this.btnGeri.Size = new System.Drawing.Size(37, 31);
+            this.btnGeri.TabIndex = 10;
+            this.btnGeri.UseVisualStyleBackColor = false;
+            this.btnGeri.Click += new System.EventHandler(this.btnGeri_Click);
+            // 
+            // btnKapat
+            // 
+            this.btnKapat.BackgroundImage = global::İnternetCafeSistemi.Properties.Resources.close__3___1_;
+            this.btnKapat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnKapat.Location = new System.Drawing.Point(220, 1);
+            this.btnKapat.Name = "btnKapat";
+            this.btnKapat.Size = new System.Drawing.Size(37, 31);
+            this.btnKapat.TabIndex = 9;
+            this.btnKapat.UseVisualStyleBackColor = true;
+            this.btnKapat.Click += new System.EventHandler(this.btnKapat_Click);
+            // 
             // FormKullaniciIstek
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(260, 332);
+            this.Controls.Add(this.btnGeri);
+            this.Controls.Add(this.btnKapat);
             this.Controls.Add(this.comboMasalar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSüreli180);
@@ -156,6 +183,7 @@
             this.Controls.Add(this.btnSüreli30);
             this.Controls.Add(this.btnSüreli15);
             this.Controls.Add(this.btnsüresiz);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormKullaniciIstek";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Kullanıcı Ekranı";
@@ -176,5 +204,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboMasalar;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button btnGeri;
+        private System.Windows.Forms.Button btnKapat;
     }
 }

@@ -33,8 +33,8 @@ namespace İnternetCafeSistemi
              kullaniciAdi = formKullaniciGirisi.kullaniciAdi; // Kullanıcı adını buraya yerleştirin veya kullanıcıdan alın
 
             // Kullanıcı tablosundan kullanıcıyı bul
-            TableKullanicilar kullanici = netCafeDB.TableKullanicilar.FirstOrDefault(k => k.KullaniciAdi == kullaniciAdi);
-            int KullaniciID = kullanici.KullaniciID;
+            TableKullanicilar kullanici = netCafeDB.TableKullanicilar.FirstOrDefault(k => k.KullaniciID == kullaniciID);
+            
             TableMasalar selectedMasa = (TableMasalar)comboMasalar.SelectedItem;
             if (kullanici != null )
             {
@@ -54,14 +54,14 @@ namespace İnternetCafeSistemi
 
                     // Masanın Durumu'nu "İSTEK" yap
                     masa.Durumu = "İSTEK";
-
+                    masa.KullaniciID = kullaniciID;
                     // Değişiklikleri veritabanına kaydet
                     netCafeDB.SaveChanges();
 
                     // TableHareketlere hareket ekle
                     TableHareketler hareket = new TableHareketler
                     {
-                         //= kullaniciAdi,
+                        KullaniciID = kullaniciID,
                         MasaID = masa.MasaID,
                         IslemTuru = $"Masa açma isteği yollandı ({sure} dakika)",
                         IslemZamani = DateTime.Now
@@ -131,10 +131,24 @@ namespace İnternetCafeSistemi
                 {
                     // Yeni bir form aç ve kullanıcıyı aktar
                     FormMasaBilgisi yeniForm = new FormMasaBilgisi();
+                    FormMasaBilgisi.Kullaniciid = kullanici.KullaniciID;
                     yeniForm.Show();
                     this.Close();
                 }
             }
+        }
+
+        private void btnKapat_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnGeri_Click(object sender, EventArgs e)
+        {
+            FormBaslangic formBaslangic = new FormBaslangic();
+
+            formBaslangic.Show();
+            this.Close(); // Şuanki formu kapat
         }
     }
 }

@@ -45,7 +45,19 @@ namespace İnternetCafeSistemi
             // Butonun özelliklerini belirle
             yeniMasa.Text = "Masa-" + (flowLayoutPanel1.Controls.Count + 1).ToString();
             yeniMasa.TextAlign = ContentAlignment.BottomCenter;
-            yeniMasa.Image = Image.FromFile("C:\\Users\\Esadcngl\\Desktop\\NetCafeSystem\\İnternetCafeSistemi\\desktop.png");
+            //yeniMasa.Image = Image.FromFile("C:\\Users\\Esadcngl\\Desktop\\NetCafeSystem\\İnternetCafeSistemi\\desktop.png");
+            try
+            {
+                // Projedeki Resources klasöründen resmi yükle
+                var desktopImage = Properties.Resources.desktop;
+
+                yeniMasa.Image = desktopImage;
+            }
+            catch (Exception ex)
+            {
+                // Hata durumunda ilgili işlemleri gerçekleştir
+                Console.WriteLine("Hata oluştu: " + ex.Message);
+            }
             yeniMasa.ImageAlign = ContentAlignment.TopCenter;
             yeniMasa.Width = 75;
             yeniMasa.Height = 85;
@@ -86,7 +98,19 @@ namespace İnternetCafeSistemi
                 }
                 masaButonu.Text = dbMasa.MasaAdi;
                 masaButonu.TextAlign = ContentAlignment.BottomCenter;
-                masaButonu.Image = Image.FromFile("C:\\Users\\Esadcngl\\Desktop\\NetCafeSystem\\İnternetCafeSistemi\\desktop.png");
+                //masaButonu.Image = Image.FromFile("C:\\Users\\Esadcngl\\Desktop\\NetCafeSystem\\İnternetCafeSistemi\\desktop.png");
+                try
+                {
+                    // Projedeki Resources klasöründen resmi yükle
+                    var desktopImage = Properties.Resources.desktop;
+
+                    masaButonu.Image = desktopImage;
+                }
+                catch (Exception ex)
+                {
+                    // Hata durumunda ilgili işlemleri gerçekleştir
+                    Console.WriteLine("Hata oluştu: " + ex.Message);
+                }
                 masaButonu.ImageAlign = ContentAlignment.TopCenter;
                 masaButonu.Width = 75;
                 masaButonu.Height = 85;
@@ -185,6 +209,7 @@ namespace İnternetCafeSistemi
             var query = from hareket in netCafeDB.TableHareketler
                         join kullanici in netCafeDB.TableKullanicilar on hareket.KullaniciID equals kullanici.KullaniciID
                         join masa in netCafeDB.TableMasalar on hareket.MasaID equals masa.MasaID
+                        orderby hareket.IslemZamani descending // En son eklenen en başta gösterilsin
                         select new
                         {
                             MasaAdi = masa.MasaAdi,
@@ -194,6 +219,7 @@ namespace İnternetCafeSistemi
                         };
 
             dataGridView1.DataSource = query.ToList();
+
 
         }
         private void dataGridViewSatisDoldur()
@@ -310,6 +336,7 @@ namespace İnternetCafeSistemi
                     netCafeDB.TableHareketler.Add(Hareket);
                     netCafeDB.SaveChanges();
                     dataGridViewLogDoldur();
+                    panelMasaInfo.Visible = false;
                     MessageBox.Show(masa.MasaAdi + " Açıldı. ");
                 }
                 else
@@ -340,54 +367,57 @@ namespace İnternetCafeSistemi
         }
         private void TimerMasalar_Tick(object sender, EventArgs e)
         {
-
-            foreach (var masaButonu in masalar)
-            {
-                string masaAdi = masaButonu.Text;
-                TableMasalar masa = netCafeDB.TableMasalar.FirstOrDefault(m => m.MasaAdi == masaAdi);
-                TableOturumlar oturum = netCafeDB.TableOturumlar.FirstOrDefault(o => o.MasaID == masa.MasaID);
-
-                if (masa != null)
+            
+            
+                foreach (var masaButonu in masalar)
                 {
-                    // Masa durumu kontrolü ve güncelleme işlemleri burada yapılır
-                    if (masa.Durumu == "DOLU")
+                    string masaAdi = masaButonu.Text;
+                    TableMasalar masa = netCafeDB.TableMasalar.FirstOrDefault(m => m.MasaAdi == masaAdi);
+                    TableOturumlar oturum = netCafeDB.TableOturumlar.FirstOrDefault(o => o.MasaID == masa.MasaID);
+
+                    if (masa != null)
                     {
-                        // Masa doluysa, süre güncelleme işlemleri burada yapılır
-                        if (oturum != null)
+                        // Masa durumu kontrolü ve güncelleme işlemleri burada yapılır
+                        if (masa.Durumu == "DOLU")
                         {
-                            DateTime baslangic = (DateTime)oturum.BaslangicZamani;
-                            DateTime şuan = DateTime.Now;
-                            TimeSpan gecenSüre = şuan - baslangic;
-                            int yeniKullanilanSure = (int)gecenSüre.TotalMinutes;
-                            oturum.KullanilanSure = yeniKullanilanSure;
-                            netCafeDB.SaveChanges();
-                            double baslangicUcreti = 5.0;
+                            // Masa doluysa, süre güncelleme işlemleri burada yapılır
+                            if (oturum != null)
+                            {
+                                DateTime baslangic = (DateTime)oturum.BaslangicZamani;
+                                DateTime şuan = DateTime.Now;
+                                TimeSpan gecenSüre = şuan - baslangic;
+                                int yeniKullanilanSure = (int)gecenSüre.TotalMinutes;
+                                oturum.KullanilanSure = yeniKullanilanSure;
+                                netCafeDB.SaveChanges();
+                                double baslangicUcreti = 5.0;
 
-                            // Her 12 dakikada 2 TL artış
-                            double dakikaBasiUcretArtisi = 2.0;
-                            double ekUcret = Math.Ceiling(gecenSüre.TotalMinutes / 12.0) * dakikaBasiUcretArtisi;
+                                // Her 12 dakikada 2 TL artış
+                                double dakikaBasiUcretArtisi = 2.0;
+                                double ekUcret = Math.Ceiling(gecenSüre.TotalMinutes / 12.0) * dakikaBasiUcretArtisi;
 
-                            // Toplam ücreti hesapla
-                            double toplamUcret = baslangicUcreti + ekUcret;
-                            oturum.Ucret = Convert.ToDecimal(toplamUcret);
+                                // Toplam ücreti hesapla
+                                double toplamUcret = baslangicUcreti + ekUcret;
+                                oturum.Ucret = Convert.ToDecimal(toplamUcret);
 
-                            netCafeDB.SaveChanges();
-                            if (oturum.AcilisTuru == "15" && oturum.KullanilanSure >= 15)
-                                OturumBitir(masa.MasaID, oturum);
-                            else if (oturum.AcilisTuru == "30" && oturum.KullanilanSure >= 30)
-                                OturumBitir(masa.MasaID, oturum);
-                            else if (oturum.AcilisTuru == "45" && oturum.KullanilanSure >= 45)
-                                OturumBitir(masa.MasaID, oturum);
-                            else if (oturum.AcilisTuru == "60" && oturum.KullanilanSure >= 60)
-                                OturumBitir(masa.MasaID, oturum);
-                            else if (oturum.AcilisTuru == "120" && oturum.KullanilanSure >= 120)
-                                OturumBitir(masa.MasaID, oturum);
-                            else if (oturum.AcilisTuru == "180" && oturum.KullanilanSure >= 180)
-                                OturumBitir(masa.MasaID, oturum);
+                                netCafeDB.SaveChanges();
+                               
+                                if (oturum.AcilisTuru == "15" && oturum.KullanilanSure >= 15)
+                                    OturumBitir(masa.MasaID, oturum);
+                                else if (oturum.AcilisTuru == "30" && oturum.KullanilanSure >= 30)
+                                    OturumBitir(masa.MasaID, oturum);
+                                else if (oturum.AcilisTuru == "45" && oturum.KullanilanSure >= 45)
+                                    OturumBitir(masa.MasaID, oturum);
+                                else if (oturum.AcilisTuru == "60" && oturum.KullanilanSure >= 60)
+                                    OturumBitir(masa.MasaID, oturum);
+                                else if (oturum.AcilisTuru == "120" && oturum.KullanilanSure >= 120)
+                                    OturumBitir(masa.MasaID, oturum);
+                                else if (oturum.AcilisTuru == "180" && oturum.KullanilanSure >= 180)
+                                    OturumBitir(masa.MasaID, oturum);
+                            }
                         }
                     }
                 }
-            }
+            
         }
         private void OturumBitir(int masaID, TableOturumlar oturum)
         {
@@ -412,12 +442,17 @@ namespace İnternetCafeSistemi
 
             // Masanın durumunu güncelle
             TableMasalar masa = netCafeDB.TableMasalar.FirstOrDefault(m => m.MasaID == masaID);
+            TableKullanicilar kullanici = netCafeDB.TableKullanicilar.FirstOrDefault(k => k.KullaniciID == masa.KullaniciID);
             if (masa != null)
             {
                 masa.Durumu = "BOŞ";
                 masa.KullaniciID = null;
             }
-
+            if (kullanici != null)
+            {
+                kullanici.MasaID = null;
+                kullanici.IstekDurum = 0;
+            }
             // Satış kaydı oluştur
             TableSatis yeniSatis = new TableSatis
             {
@@ -527,7 +562,7 @@ namespace İnternetCafeSistemi
 
                 // DataGridView'in Columns koleksiyonu üzerinden ilgili sütunların değerlerini alabilirsiniz
                 string kullaniciAdi = selectedRow.Cells["KullaniciAdi"].Value.ToString();
-               
+
                 TableKullanicilar kullanici = netCafeDB.TableKullanicilar
         .FirstOrDefault(k => k.KullaniciAdi == kullaniciAdi);
                 txtKAdi2.Text = kullanici.KullaniciAdi;
@@ -609,13 +644,27 @@ namespace İnternetCafeSistemi
             {
                 btnMasaOlustur.Visible = true;
                 btnMasaSil.Visible = true;
-            }  
+            }
         }
 
         private void btnMasaSil_Click(object sender, EventArgs e)
         {
             FormMasaSilme formMasaSilme = new FormMasaSilme();
             formMasaSilme.ShowDialog();
+        }
+
+        private void btnKapat_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnGeri_Click(object sender, EventArgs e)
+        {
+            FormBaslangic formBaslangic = new FormBaslangic();
+
+            formBaslangic.Show();
+            this.Close(); // Şuanki formu kapat
+
         }
     }
 }

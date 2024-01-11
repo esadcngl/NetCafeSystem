@@ -15,6 +15,22 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\Esadcngl\Desktop\setup3\setupson\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,6 +50,21 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>3ACC4EEF90970AC451DD6C23DF93183870FF54B1</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>İnternetCafeSistemi_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>squirrel.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -88,6 +119,12 @@
     <Compile Include="FormKullaniciIstek.Designer.cs">
       <DependentUpon>FormKullaniciIstek.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormMail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMail.Designer.cs">
+      <DependentUpon>FormMail.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMasaAc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +143,23 @@
     <Compile Include="FormMasaSilme.Designer.cs">
       <DependentUpon>FormMasaSilme.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSifreGuncelle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSifreGuncelle.Designer.cs">
+      <DependentUpon>FormSifreGuncelle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormYuklenmeEkrani.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormYuklenmeEkrani.Designer.cs">
+      <DependentUpon>FormYuklenmeEkrani.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202401102331252_InitialCreate.cs" />
+    <Compile Include="Migrations\202401102331252_InitialCreate.designer.cs">
+      <DependentUpon>202401102331252_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -170,6 +224,9 @@
     <EmbeddedResource Include="FormKullaniciIstek.resx">
       <DependentUpon>FormKullaniciIstek.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormMail.resx">
+      <DependentUpon>FormMail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMasaAc.resx">
       <DependentUpon>FormMasaAc.cs</DependentUpon>
     </EmbeddedResource>
@@ -178,6 +235,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMasaSilme.resx">
       <DependentUpon>FormMasaSilme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSifreGuncelle.resx">
+      <DependentUpon>FormSifreGuncelle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormYuklenmeEkrani.resx">
+      <DependentUpon>FormYuklenmeEkrani.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401102331252_InitialCreate.resx">
+      <DependentUpon>202401102331252_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -201,6 +267,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="İnternetCafeSistemi_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -209,6 +276,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="squirrel.ico" />
+    <None Include="desktop.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -219,8 +288,23 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\close %283%29 %281%29.png" />
+    <None Include="Resources\arrow %281%29.png" />
+    <None Include="Resources\close %283%29.png" />
     <None Include="Resources\group150.png" />
     <None Include="Resources\admin180.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
