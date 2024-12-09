@@ -1,6 +1,5 @@
 # İnternet Cafe Otomasyonu 
-Fırat Üniversitesi 2.Sınıf Nesne Yönelimli Programlama dersi için yapılmış bir projedir. Projedeki temel amacım Kullanıcının (admin) masalar üzerindeki manipülasyonlarını sağlamak , satış ve kullanıcı verilerini bulundurmaktır. Projeyi geliştirirken gerçek dünyadaki internet kafelerde bulunan yazılımlar gibi olması için daha fazla networking bilgisi gerektiğini fark ettim.
-Şu anki sistemde veritabanı bir hosting hizmet sağlayıcısı tarafından hosting edilmekte ve kullanıcın istekleri adminin yaptığı manipülasyonlar her saniye başı timer ile kontrol edilmektedir.
+Fırat Üniversitesi 2.Sınıf Nesne Yönelimli Programlama dersi için yapılmış bir projedir.
  
 ## Kullanılan Teknolojiler
 C# , Entity Framework , SmarterAsp.Net 
